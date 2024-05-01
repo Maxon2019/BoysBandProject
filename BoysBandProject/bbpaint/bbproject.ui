@@ -6,25 +6,34 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1600</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>BBproject</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="image_label">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>130</y>
-      <width>91</width>
-      <height>16</height>
+      <x>10</x>
+      <y>170</y>
+      <width>1200</width>
+      <height>675</height>
      </rect>
     </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
     <property name="text">
-     <string>Hello, world!</string>
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::LinksAccessibleByKeyboard</set>
     </property>
    </widget>
   </widget>
@@ -33,12 +42,127 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>24</height>
+     <width>1600</width>
+     <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="info">
+    <property name="title">
+     <string>Справка</string>
+    </property>
+    <addaction name="about"/>
+   </widget>
+   <widget class="QMenu" name="view">
+    <property name="title">
+     <string>Вид</string>
+    </property>
+    <widget class="QMenu" name="theme_color">
+     <property name="title">
+      <string>Цвет темы</string>
+     </property>
+     <addaction name="light"/>
+     <addaction name="dark"/>
+    </widget>
+    <addaction name="grid"/>
+    <addaction name="theme_color"/>
+   </widget>
+   <widget class="QMenu" name="settings">
+    <property name="title">
+     <string>Настройки</string>
+    </property>
+    <addaction name="hide_tool_bar"/>
+   </widget>
+   <widget class="QMenu" name="file">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="open"/>
+    <addaction name="save"/>
+    <addaction name="save_as"/>
+    <addaction name="close"/>
+   </widget>
+   <addaction name="file"/>
+   <addaction name="view"/>
+   <addaction name="settings"/>
+   <addaction name="info"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action">
+   <property name="text">
+    <string>ашгмркм</string>
+   </property>
+  </action>
+  <action name="save">
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+  </action>
+  <action name="save_as">
+   <property name="text">
+    <string>Сохранить как...</string>
+   </property>
+  </action>
+  <action name="open">
+   <property name="text">
+    <string>Открыть</string>
+   </property>
+  </action>
+  <action name="close">
+   <property name="text">
+    <string>Закрыть</string>
+   </property>
+  </action>
+  <action name="grid">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Сетка</string>
+   </property>
+  </action>
+  <action name="about">
+   <property name="text">
+    <string>О программе</string>
+   </property>
+  </action>
+  <action name="action_9">
+   <property name="text">
+    <string>Скрыть панель инструментов</string>
+   </property>
+  </action>
+  <action name="action_10">
+   <property name="text">
+    <string>Размер панели инструментов</string>
+   </property>
+  </action>
+  <action name="hide_tool_bar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Скрыть панель инструментов</string>
+   </property>
+  </action>
+  <action name="action_15">
+   <property name="text">
+    <string>Светлая</string>
+   </property>
+  </action>
+  <action name="action_16">
+   <property name="text">
+    <string>Темная</string>
+   </property>
+  </action>
+  <action name="light">
+   <property name="text">
+    <string>Светлая</string>
+   </property>
+  </action>
+  <action name="dark">
+   <property name="text">
+    <string>Темная</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
