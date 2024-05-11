@@ -4,6 +4,8 @@
 
 QColor image_default_color{255, 255, 255};
 QSize image_default_size{1200, 675};
+const int default_brush_thickness = 20;
+const int default_eraser_size = 20;
 const char * supported_formats{"Images (*.png *.xpm *.jpg *.bmp *.jpeg)"};
 
 BBproject::BBproject(QWidget *parent)
@@ -12,18 +14,23 @@ BBproject::BBproject(QWidget *parent)
 {
     this->setWindowTitle("BBpaint");
     ui->setupUi(this);
+    er_size = default_eraser_size;
+    br_thickness = default_brush_thickness;
+    fill_shape = false;
     image = new QPixmap(image_default_size);
     image->fill(image_default_color);
     ui->image_label->setFixedSize(image->size());
     ui->image_label->setPixmap(*image);
-    ui->mouse->setChecked(true);
-    connect(ui->mouse, SIGNAL(clicked()), SLOT(clicked_tool()));
-    connect(ui->shapes, SIGNAL(clicked()), SLOT(clicked_tool()));
-    connect(ui->eraser, SIGNAL(clicked()), SLOT(clicked_tool()));
-    connect(ui->brush, SIGNAL(clicked()), SLOT(clicked_tool()));
-    connect(ui->fill, SIGNAL(clicked()), SLOT(clicked_tool()));
-    connect(ui->effects, SIGNAL(clicked()), SLOT(clicked_tool()));
-    connect(ui->text_red, SIGNAL(clicked()), SLOT(clicked_tool()));
+    ui->eraser_size->setText(QString::number(er_size));
+    ui->brush_thickness->setText(QString::number(br_thickness));
+    connect(ui->shape_fill, SIGNAL(stateChanged(int)), SLOT(fill_switched()));
+    connect(ui->eraser_size, SIGNAL(editingFinished()), SLOT(eraser_edited()));
+    connect(ui->brush_thickness, SIGNAL(editingFinished()), SLOT(brush_edited()));
+    connect_buttons(ui->buttons, SLOT(clicked_tool()));
+    connect_buttons(ui->eraser_modes, SLOT(clicked_eraser_mode()));
+    connect_buttons(ui->shape_modes, SLOT(clicked_shape_mode()));
+    connect_buttons(ui->brush_modes, SLOT(clicked_brush_mode()));
+    connect_buttons(ui->effect_modes, SLOT(clicked_effect_mode()));
     path = new QString;
 }
 
@@ -37,6 +44,11 @@ BBproject::~BBproject()
 void BBproject::uncheck_buttons(QLayout *container){
     QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>();
     for(auto unit : list) {unit->setChecked(false); unit->setCheckable(false);}
+}
+
+void BBproject::connect_buttons(QLayout *container, const char* slot){
+    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>();
+    for(auto unit : list) connect(unit, SIGNAL(clicked()), slot);
 }
 
 void BBproject::clicked_tool(){
@@ -71,6 +83,96 @@ void BBproject::clicked_tool(){
         }
     }
     b->setChecked(true);
+}
+
+void BBproject::clicked_eraser_mode(){
+    QToolButton *b = qobject_cast<QToolButton*>(sender());
+    if(!b->isCheckable()){
+        uncheck_buttons(ui->eraser_modes);
+        b->setCheckable(true);
+        //write here to switch eraser shape
+        switch (ui->eraser_modes->indexOf(b)) {
+        case 0:
+            std::cout<<"switching to square eraser mode\n";
+            break;
+        case 1:
+            std::cout<<"switching to circle eraser mode\n";
+            break;
+        }
+    }
+    b->setChecked(true);
+}
+
+void BBproject::clicked_shape_mode(){
+    QToolButton *b = qobject_cast<QToolButton*>(sender());
+    if(!b->isCheckable()){
+        uncheck_buttons(ui->shape_modes);
+        b->setCheckable(true);
+        //write here to switch shape
+        switch (ui->shape_modes->indexOf(b)) {
+        default:
+            std::cout<<"shape mode selected\n";
+            break;
+        }
+    }
+    b->setChecked(true);
+}
+
+void BBproject::clicked_brush_mode(){
+    QToolButton *b = qobject_cast<QToolButton*>(sender());
+    if(!b->isCheckable()){
+        uncheck_buttons(ui->brush_modes);
+        b->setCheckable(true);
+        //write here to switch brush
+        switch (ui->brush_modes->indexOf(b)) {
+        default:
+            std::cout<<"brush mode selected\n";
+            break;
+        }
+    }
+    b->setChecked(true);
+}
+
+void BBproject::clicked_effect_mode(){
+    QToolButton *b = qobject_cast<QToolButton*>(sender());
+    if(!b->isCheckable()){
+        uncheck_buttons(ui->effect_modes);
+        b->setCheckable(true);
+        //write here to switch effect
+        switch (ui->effect_modes->indexOf(b)) {
+        default:
+            std::cout<<"effect mode selected\n";
+            break;
+        }
+    }
+    b->setChecked(true);
+}
+
+void BBproject::eraser_edited(){
+    QLineEdit* line = qobject_cast<QLineEdit*>(sender());
+    bool ok;
+    int res = line->text().toInt(&ok);
+    if(ok) er_size = res;
+    else line->setText(QString::number(er_size));
+    std::cout<<"new size is "<<er_size<<"\n";
+    //write here to add functionality
+}
+
+void BBproject::brush_edited(){
+    QLineEdit* line = qobject_cast<QLineEdit*>(sender());
+    bool ok;
+    int res = line->text().toInt(&ok);
+    if(ok) br_thickness = res;
+    else line->setText(QString::number(br_thickness));
+    std::cout<<"new thickness is "<<br_thickness<<"\n";
+    //write here to add functionality
+}
+
+void BBproject::fill_switched(){
+    QCheckBox* box = qobject_cast<QCheckBox*>(sender());
+    fill_shape = box->isChecked();
+    std::cout<<"fill property is now "<<fill_shape<<"\n";
+    //write here to add functionality
 }
 
 void BBproject::on_open_triggered()

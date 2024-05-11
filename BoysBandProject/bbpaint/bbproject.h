@@ -22,6 +22,7 @@ public:
     BBproject(QWidget *parent = nullptr);
     ~BBproject();
     void uncheck_buttons(QLayout *container);
+    void connect_buttons(QLayout *container, const char* slot);
 
 private slots:
     void on_open_triggered();
@@ -34,9 +35,22 @@ private slots:
 
     void clicked_tool();
 
+    void clicked_eraser_mode();
+    void clicked_shape_mode();
+    void clicked_brush_mode();
+    void clicked_effect_mode();
+
+    void eraser_edited();
+    void brush_edited();
+
+    void fill_switched();
+
+
 private:
     Ui::BBproject *ui;
     QPixmap *image;
     QString *path;
+    int er_size, br_thickness;
+    bool fill_shape;
 };
 #endif // BBPROJECT_H

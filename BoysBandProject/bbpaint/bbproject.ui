@@ -84,6 +84,9 @@
        <property name="checkable">
         <bool>true</bool>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -369,18 +372,24 @@
           </spacer>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <layout class="QHBoxLayout" name="eraser_modes">
            <item>
-            <widget class="QToolButton" name="toolButton_7">
+            <widget class="QToolButton" name="eraser_square">
              <property name="text">
               <string>...</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="toolButton_8">
+            <widget class="QToolButton" name="eraser_circle">
              <property name="text">
               <string>...</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -414,7 +423,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit"/>
+          <widget class="QLineEdit" name="eraser_size"/>
          </item>
         </layout>
        </item>
@@ -466,86 +475,92 @@
         </widget>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout">
+        <layout class="QGridLayout" name="shape_modes">
          <item row="0" column="1">
-          <widget class="QToolButton" name="toolButton_10">
+          <widget class="QToolButton" name="shape2">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QToolButton" name="toolButton_14">
+          <widget class="QToolButton" name="shape7">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="0" column="4">
-          <widget class="QToolButton" name="toolButton_13">
+          <widget class="QToolButton" name="shape5">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QToolButton" name="toolButton_9">
+          <widget class="QToolButton" name="shape1">
            <property name="text">
             <string>...</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QToolButton" name="toolButton_11">
+          <widget class="QToolButton" name="shape3">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="0" column="3">
-          <widget class="QToolButton" name="toolButton_12">
+          <widget class="QToolButton" name="shape4">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QToolButton" name="toolButton_15">
+          <widget class="QToolButton" name="shape12">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QToolButton" name="toolButton_16">
+          <widget class="QToolButton" name="shape6">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QToolButton" name="toolButton_17">
+          <widget class="QToolButton" name="shape11">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QToolButton" name="toolButton_18">
+          <widget class="QToolButton" name="shape8">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="3">
-          <widget class="QToolButton" name="toolButton_19">
+          <widget class="QToolButton" name="shape9">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="4">
-          <widget class="QToolButton" name="toolButton_20">
+          <widget class="QToolButton" name="shape10">
            <property name="text">
             <string>...</string>
            </property>
@@ -576,7 +591,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QCheckBox" name="checkBox">
+          <widget class="QCheckBox" name="shape_fill">
            <property name="text">
             <string/>
            </property>
@@ -683,86 +698,92 @@
         </widget>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout">
+        <layout class="QGridLayout" name="brush_modes">
          <item row="0" column="1">
-          <widget class="QToolButton" name="toolButton_10">
+          <widget class="QToolButton" name="brush2">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QToolButton" name="toolButton_14">
+          <widget class="QToolButton" name="brush7">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="0" column="4">
-          <widget class="QToolButton" name="toolButton_13">
+          <widget class="QToolButton" name="brush5">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QToolButton" name="toolButton_9">
+          <widget class="QToolButton" name="brush1">
            <property name="text">
             <string>...</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QToolButton" name="toolButton_11">
+          <widget class="QToolButton" name="brush3">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="0" column="3">
-          <widget class="QToolButton" name="toolButton_12">
+          <widget class="QToolButton" name="brush4">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QToolButton" name="toolButton_15">
+          <widget class="QToolButton" name="brush12">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QToolButton" name="toolButton_16">
+          <widget class="QToolButton" name="brush6">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QToolButton" name="toolButton_17">
+          <widget class="QToolButton" name="brush11">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QToolButton" name="toolButton_18">
+          <widget class="QToolButton" name="brush8">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="3">
-          <widget class="QToolButton" name="toolButton_19">
+          <widget class="QToolButton" name="brush9">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="4">
-          <widget class="QToolButton" name="toolButton_20">
+          <widget class="QToolButton" name="brush10">
            <property name="text">
             <string>...</string>
            </property>
@@ -793,7 +814,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_3"/>
+          <widget class="QLineEdit" name="brush_thickness"/>
          </item>
         </layout>
        </item>
@@ -997,86 +1018,92 @@
         </widget>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_2">
+        <layout class="QGridLayout" name="effect_modes">
          <item row="0" column="0">
-          <widget class="QToolButton" name="toolButton_21">
+          <widget class="QToolButton" name="effect1">
            <property name="text">
             <string>...</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QToolButton" name="toolButton_23">
+          <widget class="QToolButton" name="effect3">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="0" column="4">
-          <widget class="QToolButton" name="toolButton_25">
+          <widget class="QToolButton" name="effect5">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QToolButton" name="toolButton_22">
+          <widget class="QToolButton" name="effect2">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="0" column="3">
-          <widget class="QToolButton" name="toolButton_24">
+          <widget class="QToolButton" name="effect4">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QToolButton" name="toolButton_26">
+          <widget class="QToolButton" name="effect7">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QToolButton" name="toolButton_27">
+          <widget class="QToolButton" name="effect12">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QToolButton" name="toolButton_28">
+          <widget class="QToolButton" name="effect11">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QToolButton" name="toolButton_29">
+          <widget class="QToolButton" name="effect6">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QToolButton" name="toolButton_30">
+          <widget class="QToolButton" name="effect8">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="3">
-          <widget class="QToolButton" name="toolButton_31">
+          <widget class="QToolButton" name="effect9">
            <property name="text">
             <string>...</string>
            </property>
           </widget>
          </item>
          <item row="1" column="4">
-          <widget class="QToolButton" name="toolButton_32">
+          <widget class="QToolButton" name="effect10">
            <property name="text">
             <string>...</string>
            </property>
