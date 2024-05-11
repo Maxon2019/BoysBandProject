@@ -6,6 +6,7 @@
 #include <QString>
 #include <QPixmap>
 #include <QLabel>
+#include <QAbstractButton>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,6 +21,7 @@ class BBproject : public QMainWindow
 public:
     BBproject(QWidget *parent = nullptr);
     ~BBproject();
+    void uncheck_buttons(QLayout *container);
 
 private slots:
     void on_open_triggered();
@@ -29,6 +31,8 @@ private slots:
     void on_save_as_triggered();
 
     void on_close_triggered();
+
+    void clicked_tool();
 
 private:
     Ui::BBproject *ui;
