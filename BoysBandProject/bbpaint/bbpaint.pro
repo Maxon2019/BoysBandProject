@@ -1,3 +1,5 @@
+include(libs/Qt-Color-Widgets-master/color_widgets.pri)
+
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

@@ -1,6 +1,7 @@
 #ifndef BBPROJECT_H
 #define BBPROJECT_H
 
+#include "QtWidgets/qboxlayout.h"
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QString>
@@ -23,6 +24,9 @@ public:
     ~BBproject();
     void uncheck_buttons(QLayout *container);
     void connect_buttons(QLayout *container, const char* slot);
+    void addListItem(QHBoxLayout** list, int &count);
+    void connect_colors();
+    void set_color(QColor color, int index);
 
 private slots:
     void on_open_triggered();
@@ -44,6 +48,10 @@ private slots:
     void brush_edited();
 
     void fill_switched();
+
+    void color_switched();
+
+    void color_line_edit();
 
 
 private:

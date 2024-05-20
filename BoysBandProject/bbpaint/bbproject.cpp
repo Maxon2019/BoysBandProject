@@ -1,4 +1,5 @@
 #include "bbproject.h"
+#include "QtColorWidgets/color_wheel.hpp"
 #include "ui_bbproject.h"
 #include <iostream>
 
@@ -32,6 +33,7 @@ BBproject::BBproject(QWidget *parent)
     connect_buttons(ui->brush_modes, SLOT(clicked_brush_mode()));
     connect_buttons(ui->effect_modes, SLOT(clicked_effect_mode()));
     path = new QString;
+    connect_colors();
 }
 
 BBproject::~BBproject()
@@ -49,6 +51,95 @@ void BBproject::uncheck_buttons(QLayout *container){
 void BBproject::connect_buttons(QLayout *container, const char* slot){
     QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>();
     for(auto unit : list) connect(unit, SIGNAL(clicked()), slot);
+}
+
+void BBproject::connect_colors(){
+    color_widgets::ColorWheel* cw1 = new color_widgets::ColorWheel(ui->brush_page);
+    ui->brush_color_setter->insertWidget(0, cw1);
+    connect(cw1, SIGNAL(colorSelected(QColor)), SLOT(color_switched()));
+
+    color_widgets::ColorWheel* cw2 = new color_widgets::ColorWheel(ui->shapes_page);
+    ui->shape_color_setter->insertWidget(0, cw2);
+    connect(cw2, SIGNAL(colorSelected(QColor)), SLOT(color_switched()));
+
+    color_widgets::ColorWheel* cw3 = new color_widgets::ColorWheel(ui->fill_page);
+    ui->fill_color_setter->insertWidget(0, cw3);
+    connect(cw3, SIGNAL(colorSelected(QColor)), SLOT(color_switched()));
+
+    connect(ui->red_line_edit_1, SIGNAL(editingFinished()), SLOT(color_line_edit()));
+    connect(ui->green_line_edit_1, SIGNAL(editingFinished()), SLOT(color_line_edit()));
+    connect(ui->blue_line_edit_1, SIGNAL(editingFinished()), SLOT(color_line_edit()));
+
+    connect(ui->red_line_edit_2, SIGNAL(editingFinished()), SLOT(color_line_edit()));
+    connect(ui->green_line_edit_2, SIGNAL(editingFinished()), SLOT(color_line_edit()));
+    connect(ui->blue_line_edit_2, SIGNAL(editingFinished()), SLOT(color_line_edit()));
+
+    connect(ui->red_line_edit_3, SIGNAL(editingFinished()), SLOT(color_line_edit()));
+    connect(ui->green_line_edit_3, SIGNAL(editingFinished()), SLOT(color_line_edit()));
+    connect(ui->blue_line_edit_3, SIGNAL(editingFinished()), SLOT(color_line_edit()));
+}
+
+void BBproject::set_color(QColor color, int index){
+    //here you do stuff with setting color, index is index of qStackedWidget page, aka tool id
+    switch(index){
+    case 0:
+
+        break;
+    default:
+
+        break;
+    }
+}
+
+void BBproject::color_switched(){
+    color_widgets::ColorWheel* cw = qobject_cast<color_widgets::ColorWheel*>(sender());
+    QList<QLineEdit*> list = cw->parentWidget()->findChildren<QLineEdit*>();
+    int dif = 0;
+    if(list.size()>3) dif = list.size()-3;
+    list[0+dif]->setText(QString::number(cw->color().red()));
+    list[1+dif]->setText(QString::number(cw->color().green()));
+    list[2+dif]->setText(QString::number(cw->color().blue()));
+    set_color(cw->color(), ui->tool_stack->currentIndex());
+}
+
+void BBproject::color_line_edit(){
+    QLineEdit* line = qobject_cast<QLineEdit*>(sender());
+    bool ok;
+    int res = line->text().toInt(&ok);
+    color_widgets::ColorWheel* cw = line->parentWidget()->findChild<color_widgets::ColorWheel*>();
+    int r = cw->color().red(), g = cw->color().green(), b = cw->color().blue();
+    QList<QLineEdit*> all_lines = line->parentWidget()->findChildren<QLineEdit*>();
+    int id = all_lines.indexOf(line);
+    if(all_lines.size()>3) id-=all_lines.size()-3;
+    if(ok && res<=255 && res>=0) {
+        switch(id){
+        case 0:
+            r = res;
+            break;
+        case 1:
+            g = res;
+            break;
+        case 2:
+            b = res;
+            break;
+        }
+        cw->setColor(QColor(r,g,b));
+        set_color(QColor(r,g,b), ui->tool_stack->currentIndex());
+    }
+    else {
+        switch (id) {
+        case 0:
+            res = r;
+            break;
+        case 1:
+            res = g;
+            break;
+        case 2:
+            res = b;
+            break;
+        }
+        line->setText(QString::number(res));
+    }
 }
 
 void BBproject::clicked_tool(){
