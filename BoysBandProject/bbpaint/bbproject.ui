@@ -75,11 +75,28 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>64</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <property name="text">
-        <string>1</string>
+        <string/>
        </property>
        <property name="icon">
-        <iconset theme="battery"/>
+        <iconset>
+         <normalon>:/icons/free-icon-font-cursor-3914590.png</normalon>
+        </iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -97,8 +114,22 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <property name="text">
-        <string>2</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normalon>:/icons/free-icon-font-eraser-10435280.png</normalon>
+        </iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
        </property>
        <property name="checkable">
         <bool>false</bool>
@@ -113,11 +144,22 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <property name="text">
-        <string>3</string>
+        <string/>
        </property>
        <property name="icon">
-        <iconset theme="applications-internet"/>
+        <iconset>
+         <normaloff>img/resources.svg</normaloff>
+         <normalon>:/icons/free-icon-font-resources-3916746.png</normalon>img/resources.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
        </property>
        <property name="checkable">
         <bool>false</bool>
@@ -133,7 +175,18 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>4</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normalon>:/icons/free-icon-font-paint-brush-3914857.png</normalon>
+        </iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
        </property>
        <property name="checkable">
         <bool>false</bool>
@@ -149,7 +202,18 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>5</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normalon>:/icons/free-icon-font-fill-3914163.png</normalon>
+        </iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
        </property>
        <property name="checkable">
         <bool>false</bool>
@@ -165,7 +229,18 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>6</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normalon>:/icons/free-icon-font-customization-14644589.png</normalon>
+        </iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
        </property>
        <property name="checkable">
         <bool>false</bool>
@@ -180,11 +255,31 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
        <property name="text">
-        <string>7</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normalon>:/icons/free-icon-font-message-text-9821604.png</normalon>
+        </iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
        </property>
        <property name="checkable">
         <bool>false</bool>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::DelayedPopup</enum>
        </property>
       </widget>
      </item>
@@ -205,6 +300,13 @@
       </spacer>
      </item>
     </layout>
+    <zorder>eraser</zorder>
+    <zorder>brush</zorder>
+    <zorder>fill</zorder>
+    <zorder>effects</zorder>
+    <zorder>text_red</zorder>
+    <zorder>mouse</zorder>
+    <zorder>shapes</zorder>
    </widget>
    <widget class="QStackedWidget" name="tool_stack">
     <property name="geometry">
@@ -219,7 +321,7 @@
      <bool>true</bool>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="mouse_page">
      <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -256,12 +358,22 @@
            <property name="text">
             <string/>
            </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/icons/free-icon-font-rotate-left-7435142.png</normalon>
+            </iconset>
+           </property>
           </widget>
          </item>
          <item>
           <widget class="QToolButton" name="rotate_counterclockwise">
            <property name="text">
             <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/icons/free-icon-font-rotate-right-3917350.png</normalon>
+            </iconset>
            </property>
           </widget>
          </item>
@@ -281,12 +393,22 @@
            <property name="text">
             <string/>
            </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/icons/free-icon-font-reflect-horizontal-9291725.png</normalon>
+            </iconset>
+           </property>
           </widget>
          </item>
          <item>
           <widget class="QToolButton" name="vertical_mirror">
            <property name="text">
             <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/icons/free-icon-font-reflect-vertical-9291729.png</normalon>
+            </iconset>
            </property>
           </widget>
          </item>
@@ -354,12 +476,21 @@
              <property name="text">
               <string>...</string>
              </property>
+             <property name="icon">
+              <iconset>
+               <normalon>:/icons/free-icon-font-circle-3916847.png</normalon>
+              </iconset>
+             </property>
             </widget>
            </item>
            <item>
             <widget class="QToolButton" name="eraser_circle">
              <property name="text">
               <string>...</string>
+             </property>
+             <property name="icon">
+              <iconset resource="img/icons.qrc">
+               <normaloff>:/icons/free-icon-font-square-3916926.png</normaloff>:/icons/free-icon-font-square-3916926.png</iconset>
              </property>
              <property name="checkable">
               <bool>true</bool>
@@ -429,7 +560,12 @@
          <item row="0" column="1">
           <widget class="QToolButton" name="shape2">
            <property name="text">
-            <string>...</string>
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/icons/free-icon-font-triangle-5528184.png</normalon>
+            </iconset>
            </property>
           </widget>
          </item>
@@ -438,6 +574,11 @@
            <property name="text">
             <string>...</string>
            </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/icons/free-icon-font-curve-alt-15005293.png</normalon>
+            </iconset>
+           </property>
           </widget>
          </item>
          <item row="0" column="4">
@@ -445,12 +586,22 @@
            <property name="text">
             <string>...</string>
            </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>img/star.svg</normaloff>
+             <normalon>:/icons/free-icon-font-star-3916591.png</normalon>img/star.svg</iconset>
+           </property>
           </widget>
          </item>
          <item row="0" column="0">
           <widget class="QToolButton" name="shape1">
            <property name="text">
-            <string>...</string>
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/icons/free-icon-font-circle-3916847.png</normalon>
+            </iconset>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -465,12 +616,21 @@
            <property name="text">
             <string>...</string>
            </property>
+           <property name="icon">
+            <iconset resource="img/icons.qrc">
+             <normaloff>:/icons/free-icon-font-square-3916926.png</normaloff>:/icons/free-icon-font-square-3916926.png</iconset>
+           </property>
           </widget>
          </item>
          <item row="0" column="3">
           <widget class="QToolButton" name="shape4">
            <property name="text">
             <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>img/rectangle-horizontal.svg</normaloff>
+             <normalon>:/icons/free-icon-font-rectangle-horizontal-3916918.png</normalon>img/rectangle-horizontal.svg</iconset>
            </property>
           </widget>
          </item>
@@ -485,6 +645,11 @@
           <widget class="QToolButton" name="shape6">
            <property name="text">
             <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/icons/free-icon-font-slash.png</normalon>
+            </iconset>
            </property>
           </widget>
          </item>
@@ -1228,7 +1393,7 @@
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="info">
@@ -1349,6 +1514,9 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="img/icons.qrc"/>
+  <include location="img/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -13,7 +13,8 @@ BBproject::BBproject(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::BBproject)
 {
-    this->setWindowTitle("BBpaint");
+    this->setWindowTitle("Blue Lines");
+    this->setWindowIcon(QIcon(":/icons/mars-double.png"));
     ui->setupUi(this);
     er_size = default_eraser_size;
     br_thickness = default_brush_thickness;

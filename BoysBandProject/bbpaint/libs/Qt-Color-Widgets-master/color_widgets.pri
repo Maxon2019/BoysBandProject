@@ -66,3 +66,24 @@ FORMS += \
 RESOURCES += \
     $$PWD/resources/QtColorWidgets/color_widgets.qrc
 
+DISTFILES += \
+    $$PWD/resources/QtColorWidgets/img/cursor.svg \
+    $$PWD/resources/QtColorWidgets/img/customization.svg \
+    $$PWD/resources/QtColorWidgets/img/eraser.svg \
+    $$PWD/resources/QtColorWidgets/img/fill.svg \
+    $$PWD/resources/QtColorWidgets/img/mars-double.png \
+    $$PWD/resources/QtColorWidgets/img/message-text.svg \
+    $$PWD/resources/QtColorWidgets/img/mouse-field.svg \
+    $$PWD/resources/QtColorWidgets/img/paint-brush.svg \
+    $$PWD/resources/QtColorWidgets/img/rectangle-horizontal.svg \
+    $$PWD/resources/QtColorWidgets/img/reflect-horizontal.svg \
+    $$PWD/resources/QtColorWidgets/img/reflect-vertical.svg \
+    $$PWD/resources/QtColorWidgets/img/resources.svg \
+    $$PWD/resources/QtColorWidgets/img/rotate-left.svg \
+    $$PWD/resources/QtColorWidgets/img/rotate-right.svg \
+    $$PWD/resources/QtColorWidgets/img/square.svg \
+    $$PWD/resources/QtColorWidgets/img/star-of-david.png \
+    $$PWD/resources/QtColorWidgets/img/star.svg \
+    $$PWD/resources/QtColorWidgets/img/triangle.svg \
+    $$PWD/resources/QtColorWidgets/img/сircle.svg
+
