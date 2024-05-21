@@ -35,7 +35,7 @@ static void loadResource()
     {
         //no resources loaded, achtung!!
 
-        // Q_INIT_RESOURCE(color_widgets);
+        Q_INIT_RESOURCE(color_widgets);
 
         // do {
         //     extern int QT_MANGLE_NAMESPACE(qInitResources_color_widgets)();
