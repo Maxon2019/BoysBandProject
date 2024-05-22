@@ -42,11 +42,12 @@ public:
     QAction *about;
     QAction *action_9;
     QAction *action_10;
-    QAction *hide_tool_bar;
     QAction *action_15;
     QAction *action_16;
     QAction *light;
     QAction *dark;
+    QAction *top;
+    QAction *left;
     QWidget *centralwidget;
     QLabel *image_label;
     QWidget *horizontalLayoutWidget;
@@ -91,14 +92,14 @@ public:
     QVBoxLayout *verticalLayout_7;
     QLabel *label_9;
     QGridLayout *shape_modes;
-    QToolButton *shape2;
-    QToolButton *shape7;
-    QToolButton *shape5;
-    QToolButton *shape1;
-    QToolButton *shape3;
-    QToolButton *shape4;
+    QToolButton *shape_spline;
+    QToolButton *shape_star;
+    QToolButton *shape_rectangle;
+    QToolButton *shape_line;
+    QToolButton *shape_circle;
+    QToolButton *shape_square;
     QToolButton *shape12;
-    QToolButton *shape6;
+    QToolButton *shape_triangle;
     QToolButton *shape11;
     QToolButton *shape8;
     QToolButton *shape9;
@@ -200,10 +201,8 @@ public:
     QWidget *text_ed_page;
     QLabel *label_23;
     QMenuBar *menubar;
-    QMenu *info;
     QMenu *view;
     QMenu *theme_color;
-    QMenu *settings;
     QMenu *file;
     QStatusBar *statusbar;
 
@@ -231,9 +230,6 @@ public:
         action_9->setObjectName(QString::fromUtf8("action_9"));
         action_10 = new QAction(BBproject);
         action_10->setObjectName(QString::fromUtf8("action_10"));
-        hide_tool_bar = new QAction(BBproject);
-        hide_tool_bar->setObjectName(QString::fromUtf8("hide_tool_bar"));
-        hide_tool_bar->setCheckable(true);
         action_15 = new QAction(BBproject);
         action_15->setObjectName(QString::fromUtf8("action_15"));
         action_16 = new QAction(BBproject);
@@ -242,12 +238,16 @@ public:
         light->setObjectName(QString::fromUtf8("light"));
         dark = new QAction(BBproject);
         dark->setObjectName(QString::fromUtf8("dark"));
+        top = new QAction(BBproject);
+        top->setObjectName(QString::fromUtf8("top"));
+        left = new QAction(BBproject);
+        left->setObjectName(QString::fromUtf8("left"));
         centralwidget = new QWidget(BBproject);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         image_label = new QLabel(centralwidget);
         image_label->setObjectName(QString::fromUtf8("image_label"));
         image_label->setEnabled(true);
-        image_label->setGeometry(QRect(0, 60, 1200, 675));
+        image_label->setGeometry(QRect(0, 64, 1200, 675));
         image_label->setCursor(QCursor(Qt::IBeamCursor));
         image_label->setFrameShadow(QFrame::Plain);
         image_label->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
@@ -269,7 +269,7 @@ public:
         mouse->setMinimumSize(QSize(64, 50));
         mouse->setStyleSheet(QString::fromUtf8(""));
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/icons/free-icon-font-cursor-3914590.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon.addFile(QString::fromUtf8(":/icons/cursor.png"), QSize(), QIcon::Normal, QIcon::On);
         mouse->setIcon(icon);
         mouse->setIconSize(QSize(32, 32));
         mouse->setCheckable(true);
@@ -283,7 +283,7 @@ public:
         eraser->setSizePolicy(sizePolicy);
         eraser->setStyleSheet(QString::fromUtf8(""));
         QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/icons/free-icon-font-eraser-10435280.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon1.addFile(QString::fromUtf8(":/icons/eraser.png"), QSize(), QIcon::Normal, QIcon::On);
         eraser->setIcon(icon1);
         eraser->setIconSize(QSize(32, 32));
         eraser->setCheckable(false);
@@ -297,7 +297,7 @@ public:
         shapes->setStyleSheet(QString::fromUtf8(""));
         QIcon icon2;
         icon2.addFile(QString::fromUtf8("img/resources.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        icon2.addFile(QString::fromUtf8(":/icons/free-icon-font-resources-3916746.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon2.addFile(QString::fromUtf8(":/icons/shapes.png"), QSize(), QIcon::Normal, QIcon::On);
         shapes->setIcon(icon2);
         shapes->setIconSize(QSize(32, 32));
         shapes->setCheckable(false);
@@ -309,7 +309,7 @@ public:
         sizePolicy.setHeightForWidth(brush->sizePolicy().hasHeightForWidth());
         brush->setSizePolicy(sizePolicy);
         QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/icons/free-icon-font-paint-brush-3914857.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon3.addFile(QString::fromUtf8(":/icons/brush.png"), QSize(), QIcon::Normal, QIcon::On);
         brush->setIcon(icon3);
         brush->setIconSize(QSize(32, 32));
         brush->setCheckable(false);
@@ -321,7 +321,7 @@ public:
         sizePolicy.setHeightForWidth(fill->sizePolicy().hasHeightForWidth());
         fill->setSizePolicy(sizePolicy);
         QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/icons/free-icon-font-fill-3914163.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon4.addFile(QString::fromUtf8(":/icons/fill.png"), QSize(), QIcon::Normal, QIcon::On);
         fill->setIcon(icon4);
         fill->setIconSize(QSize(32, 32));
         fill->setCheckable(false);
@@ -333,7 +333,7 @@ public:
         sizePolicy.setHeightForWidth(effects->sizePolicy().hasHeightForWidth());
         effects->setSizePolicy(sizePolicy);
         QIcon icon5;
-        icon5.addFile(QString::fromUtf8(":/icons/free-icon-font-customization-14644589.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon5.addFile(QString::fromUtf8(":/icons/effects.png"), QSize(), QIcon::Normal, QIcon::On);
         effects->setIcon(icon5);
         effects->setIconSize(QSize(32, 32));
         effects->setCheckable(false);
@@ -342,6 +342,7 @@ public:
 
         text_red = new QToolButton(horizontalLayoutWidget);
         text_red->setObjectName(QString::fromUtf8("text_red"));
+        text_red->setEnabled(true);
         QSizePolicy sizePolicy1(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         sizePolicy1.setHorizontalStretch(2);
         sizePolicy1.setVerticalStretch(0);
@@ -349,7 +350,7 @@ public:
         text_red->setSizePolicy(sizePolicy1);
         text_red->setAutoFillBackground(false);
         QIcon icon6;
-        icon6.addFile(QString::fromUtf8(":/icons/free-icon-font-message-text-9821604.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon6.addFile(QString::fromUtf8(":/icons/text.png"), QSize(), QIcon::Normal, QIcon::On);
         text_red->setIcon(icon6);
         text_red->setIconSize(QSize(32, 32));
         text_red->setCheckable(false);
@@ -397,7 +398,7 @@ public:
         rotate_clockwise = new QToolButton(verticalLayoutWidget_2);
         rotate_clockwise->setObjectName(QString::fromUtf8("rotate_clockwise"));
         QIcon icon7;
-        icon7.addFile(QString::fromUtf8(":/icons/free-icon-font-rotate-left-7435142.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon7.addFile(QString::fromUtf8(":/icons/rotate-right.png"), QSize(), QIcon::Normal, QIcon::On);
         rotate_clockwise->setIcon(icon7);
 
         horizontalLayout->addWidget(rotate_clockwise);
@@ -405,7 +406,7 @@ public:
         rotate_counterclockwise = new QToolButton(verticalLayoutWidget_2);
         rotate_counterclockwise->setObjectName(QString::fromUtf8("rotate_counterclockwise"));
         QIcon icon8;
-        icon8.addFile(QString::fromUtf8(":/icons/free-icon-font-rotate-right-3917350.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon8.addFile(QString::fromUtf8(":/icons/rotate-left.png"), QSize(), QIcon::Normal, QIcon::On);
         rotate_counterclockwise->setIcon(icon8);
 
         horizontalLayout->addWidget(rotate_counterclockwise);
@@ -423,7 +424,7 @@ public:
         horizontal_mirror = new QToolButton(verticalLayoutWidget_2);
         horizontal_mirror->setObjectName(QString::fromUtf8("horizontal_mirror"));
         QIcon icon9;
-        icon9.addFile(QString::fromUtf8(":/icons/free-icon-font-reflect-horizontal-9291725.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon9.addFile(QString::fromUtf8(":/icons/reflect-vertical.png"), QSize(), QIcon::Normal, QIcon::On);
         horizontal_mirror->setIcon(icon9);
 
         horizontalLayout_3->addWidget(horizontal_mirror);
@@ -431,7 +432,7 @@ public:
         vertical_mirror = new QToolButton(verticalLayoutWidget_2);
         vertical_mirror->setObjectName(QString::fromUtf8("vertical_mirror"));
         QIcon icon10;
-        icon10.addFile(QString::fromUtf8(":/icons/free-icon-font-reflect-vertical-9291729.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon10.addFile(QString::fromUtf8(":/icons/reflect_horizontal.png"), QSize(), QIcon::Normal, QIcon::On);
         vertical_mirror->setIcon(icon10);
 
         horizontalLayout_3->addWidget(vertical_mirror);
@@ -481,7 +482,7 @@ public:
         eraser_square = new QToolButton(verticalLayoutWidget_3);
         eraser_square->setObjectName(QString::fromUtf8("eraser_square"));
         QIcon icon11;
-        icon11.addFile(QString::fromUtf8(":/icons/free-icon-font-circle-3916847.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon11.addFile(QString::fromUtf8(":/icons/square.png"), QSize(), QIcon::Normal, QIcon::On);
         eraser_square->setIcon(icon11);
 
         eraser_modes->addWidget(eraser_square);
@@ -489,7 +490,7 @@ public:
         eraser_circle = new QToolButton(verticalLayoutWidget_3);
         eraser_circle->setObjectName(QString::fromUtf8("eraser_circle"));
         QIcon icon12;
-        icon12.addFile(QString::fromUtf8(":/icons/free-icon-font-square-3916926.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon12.addFile(QString::fromUtf8(":/icons/circle.png"), QSize(), QIcon::Normal, QIcon::Off);
         eraser_circle->setIcon(icon12);
         eraser_circle->setCheckable(true);
         eraser_circle->setChecked(true);
@@ -547,66 +548,73 @@ public:
 
         shape_modes = new QGridLayout();
         shape_modes->setObjectName(QString::fromUtf8("shape_modes"));
-        shape2 = new QToolButton(verticalLayoutWidget_5);
-        shape2->setObjectName(QString::fromUtf8("shape2"));
+        shape_spline = new QToolButton(verticalLayoutWidget_5);
+        shape_spline->setObjectName(QString::fromUtf8("shape_spline"));
         QIcon icon13;
-        icon13.addFile(QString::fromUtf8(":/icons/free-icon-font-triangle-5528184.png"), QSize(), QIcon::Normal, QIcon::On);
-        shape2->setIcon(icon13);
+        icon13.addFile(QString::fromUtf8(":/icons/spline.png"), QSize(), QIcon::Normal, QIcon::On);
+        shape_spline->setIcon(icon13);
 
-        shape_modes->addWidget(shape2, 0, 1, 1, 1);
+        shape_modes->addWidget(shape_spline, 0, 1, 1, 1);
 
-        shape7 = new QToolButton(verticalLayoutWidget_5);
-        shape7->setObjectName(QString::fromUtf8("shape7"));
+        shape_star = new QToolButton(verticalLayoutWidget_5);
+        shape_star->setObjectName(QString::fromUtf8("shape_star"));
         QIcon icon14;
+        icon14.addFile(QString::fromUtf8(":/icons/star.png"), QSize(), QIcon::Normal, QIcon::Off);
         icon14.addFile(QString::fromUtf8(":/icons/free-icon-font-curve-alt-15005293.png"), QSize(), QIcon::Normal, QIcon::On);
-        shape7->setIcon(icon14);
+        shape_star->setIcon(icon14);
 
-        shape_modes->addWidget(shape7, 1, 1, 1, 1);
+        shape_modes->addWidget(shape_star, 1, 1, 1, 1);
 
-        shape5 = new QToolButton(verticalLayoutWidget_5);
-        shape5->setObjectName(QString::fromUtf8("shape5"));
+        shape_rectangle = new QToolButton(verticalLayoutWidget_5);
+        shape_rectangle->setObjectName(QString::fromUtf8("shape_rectangle"));
         QIcon icon15;
-        icon15.addFile(QString::fromUtf8("img/star.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        icon15.addFile(QString::fromUtf8(":/icons/rectangle.png"), QSize(), QIcon::Normal, QIcon::Off);
         icon15.addFile(QString::fromUtf8(":/icons/free-icon-font-star-3916591.png"), QSize(), QIcon::Normal, QIcon::On);
-        shape5->setIcon(icon15);
+        shape_rectangle->setIcon(icon15);
 
-        shape_modes->addWidget(shape5, 0, 4, 1, 1);
+        shape_modes->addWidget(shape_rectangle, 0, 4, 1, 1);
 
-        shape1 = new QToolButton(verticalLayoutWidget_5);
-        shape1->setObjectName(QString::fromUtf8("shape1"));
-        shape1->setIcon(icon11);
-        shape1->setCheckable(true);
-        shape1->setChecked(true);
-
-        shape_modes->addWidget(shape1, 0, 0, 1, 1);
-
-        shape3 = new QToolButton(verticalLayoutWidget_5);
-        shape3->setObjectName(QString::fromUtf8("shape3"));
-        shape3->setIcon(icon12);
-
-        shape_modes->addWidget(shape3, 0, 2, 1, 1);
-
-        shape4 = new QToolButton(verticalLayoutWidget_5);
-        shape4->setObjectName(QString::fromUtf8("shape4"));
+        shape_line = new QToolButton(verticalLayoutWidget_5);
+        shape_line->setObjectName(QString::fromUtf8("shape_line"));
         QIcon icon16;
-        icon16.addFile(QString::fromUtf8("img/rectangle-horizontal.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        icon16.addFile(QString::fromUtf8(":/icons/free-icon-font-rectangle-horizontal-3916918.png"), QSize(), QIcon::Normal, QIcon::On);
-        shape4->setIcon(icon16);
+        icon16.addFile(QString::fromUtf8(":/icons/line.png"), QSize(), QIcon::Normal, QIcon::On);
+        shape_line->setIcon(icon16);
+        shape_line->setCheckable(true);
+        shape_line->setChecked(true);
 
-        shape_modes->addWidget(shape4, 0, 3, 1, 1);
+        shape_modes->addWidget(shape_line, 0, 0, 1, 1);
+
+        shape_circle = new QToolButton(verticalLayoutWidget_5);
+        shape_circle->setObjectName(QString::fromUtf8("shape_circle"));
+        QIcon icon17;
+        icon17.addFile(QString::fromUtf8(":/icons/free-icon-font-square-3916926.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon17.addFile(QString::fromUtf8(":/icons/circle.png"), QSize(), QIcon::Normal, QIcon::On);
+        shape_circle->setIcon(icon17);
+
+        shape_modes->addWidget(shape_circle, 0, 2, 1, 1);
+
+        shape_square = new QToolButton(verticalLayoutWidget_5);
+        shape_square->setObjectName(QString::fromUtf8("shape_square"));
+        QIcon icon18;
+        icon18.addFile(QString::fromUtf8("img/rectangle-horizontal.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        icon18.addFile(QString::fromUtf8(":/icons/square.png"), QSize(), QIcon::Normal, QIcon::On);
+        shape_square->setIcon(icon18);
+
+        shape_modes->addWidget(shape_square, 0, 3, 1, 1);
 
         shape12 = new QToolButton(verticalLayoutWidget_5);
         shape12->setObjectName(QString::fromUtf8("shape12"));
 
         shape_modes->addWidget(shape12, 2, 1, 1, 1);
 
-        shape6 = new QToolButton(verticalLayoutWidget_5);
-        shape6->setObjectName(QString::fromUtf8("shape6"));
-        QIcon icon17;
-        icon17.addFile(QString::fromUtf8(":/icons/free-icon-font-slash.png"), QSize(), QIcon::Normal, QIcon::On);
-        shape6->setIcon(icon17);
+        shape_triangle = new QToolButton(verticalLayoutWidget_5);
+        shape_triangle->setObjectName(QString::fromUtf8("shape_triangle"));
+        QIcon icon19;
+        icon19.addFile(QString::fromUtf8(":/icons/triangle.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon19.addFile(QString::fromUtf8(":/icons/free-icon-font-slash.png"), QSize(), QIcon::Normal, QIcon::On);
+        shape_triangle->setIcon(icon19);
 
-        shape_modes->addWidget(shape6, 1, 0, 1, 1);
+        shape_modes->addWidget(shape_triangle, 1, 0, 1, 1);
 
         shape11 = new QToolButton(verticalLayoutWidget_5);
         shape11->setObjectName(QString::fromUtf8("shape11"));
@@ -1157,14 +1165,10 @@ public:
         menubar = new QMenuBar(BBproject);
         menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 1280, 22));
-        info = new QMenu(menubar);
-        info->setObjectName(QString::fromUtf8("info"));
         view = new QMenu(menubar);
         view->setObjectName(QString::fromUtf8("view"));
         theme_color = new QMenu(view);
         theme_color->setObjectName(QString::fromUtf8("theme_color"));
-        settings = new QMenu(menubar);
-        settings->setObjectName(QString::fromUtf8("settings"));
         file = new QMenu(menubar);
         file->setObjectName(QString::fromUtf8("file"));
         BBproject->setMenuBar(menubar);
@@ -1174,14 +1178,9 @@ public:
 
         menubar->addAction(file->menuAction());
         menubar->addAction(view->menuAction());
-        menubar->addAction(settings->menuAction());
-        menubar->addAction(info->menuAction());
-        info->addAction(about);
-        view->addAction(grid);
         view->addAction(theme_color->menuAction());
         theme_color->addAction(light);
         theme_color->addAction(dark);
-        settings->addAction(hide_tool_bar);
         file->addAction(open);
         file->addAction(save);
         file->addAction(save_as);
@@ -1189,7 +1188,7 @@ public:
 
         retranslateUi(BBproject);
 
-        tool_stack->setCurrentIndex(6);
+        tool_stack->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(BBproject);
@@ -1197,7 +1196,7 @@ public:
 
     void retranslateUi(QMainWindow *BBproject)
     {
-        BBproject->setWindowTitle(QCoreApplication::translate("BBproject", "BBproject", nullptr));
+        BBproject->setWindowTitle(QCoreApplication::translate("BBproject", "Blue Lines", nullptr));
         action->setText(QCoreApplication::translate("BBproject", "\320\260\321\210\320\263\320\274\321\200\320\272\320\274", nullptr));
         save->setText(QCoreApplication::translate("BBproject", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
         save_as->setText(QCoreApplication::translate("BBproject", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214 \320\272\320\260\320\272...", nullptr));
@@ -1207,11 +1206,12 @@ public:
         about->setText(QCoreApplication::translate("BBproject", "\320\236 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\320\265", nullptr));
         action_9->setText(QCoreApplication::translate("BBproject", "\320\241\320\272\321\200\321\213\321\202\321\214 \320\277\320\260\320\275\320\265\320\273\321\214 \320\270\320\275\321\201\321\202\321\200\321\203\320\274\320\265\320\275\321\202\320\276\320\262", nullptr));
         action_10->setText(QCoreApplication::translate("BBproject", "\320\240\320\260\320\267\320\274\320\265\321\200 \320\277\320\260\320\275\320\265\320\273\320\270 \320\270\320\275\321\201\321\202\321\200\321\203\320\274\320\265\320\275\321\202\320\276\320\262", nullptr));
-        hide_tool_bar->setText(QCoreApplication::translate("BBproject", "\320\241\320\272\321\200\321\213\321\202\321\214 \320\277\320\260\320\275\320\265\320\273\321\214 \320\270\320\275\321\201\321\202\321\200\321\203\320\274\320\265\320\275\321\202\320\276\320\262", nullptr));
         action_15->setText(QCoreApplication::translate("BBproject", "\320\241\320\262\320\265\321\202\320\273\320\260\321\217", nullptr));
         action_16->setText(QCoreApplication::translate("BBproject", "\320\242\320\265\320\274\320\275\320\260\321\217", nullptr));
         light->setText(QCoreApplication::translate("BBproject", "\320\241\320\262\320\265\321\202\320\273\320\260\321\217", nullptr));
         dark->setText(QCoreApplication::translate("BBproject", "\320\242\320\265\320\274\320\275\320\260\321\217", nullptr));
+        top->setText(QCoreApplication::translate("BBproject", "\320\241\320\262\320\265\321\200\321\205\321\203", nullptr));
+        left->setText(QCoreApplication::translate("BBproject", "\320\241\320\273\320\265\320\262\320\260", nullptr));
         image_label->setText(QString());
         mouse->setText(QString());
         eraser->setText(QString());
@@ -1233,14 +1233,14 @@ public:
         eraser_circle->setText(QCoreApplication::translate("BBproject", "...", nullptr));
         label_8->setText(QCoreApplication::translate("BBproject", "\320\240\320\260\320\267\320\274\320\265\321\200", nullptr));
         label_9->setText(QCoreApplication::translate("BBproject", "\320\244\320\270\320\263\321\203\321\200\321\213:", nullptr));
-        shape2->setText(QString());
-        shape7->setText(QCoreApplication::translate("BBproject", "...", nullptr));
-        shape5->setText(QCoreApplication::translate("BBproject", "...", nullptr));
-        shape1->setText(QString());
-        shape3->setText(QCoreApplication::translate("BBproject", "...", nullptr));
-        shape4->setText(QCoreApplication::translate("BBproject", "...", nullptr));
+        shape_spline->setText(QString());
+        shape_star->setText(QCoreApplication::translate("BBproject", "...", nullptr));
+        shape_rectangle->setText(QCoreApplication::translate("BBproject", "...", nullptr));
+        shape_line->setText(QString());
+        shape_circle->setText(QCoreApplication::translate("BBproject", "...", nullptr));
+        shape_square->setText(QCoreApplication::translate("BBproject", "...", nullptr));
         shape12->setText(QCoreApplication::translate("BBproject", "...", nullptr));
-        shape6->setText(QCoreApplication::translate("BBproject", "...", nullptr));
+        shape_triangle->setText(QCoreApplication::translate("BBproject", "...", nullptr));
         shape11->setText(QCoreApplication::translate("BBproject", "...", nullptr));
         shape8->setText(QCoreApplication::translate("BBproject", "...", nullptr));
         shape9->setText(QCoreApplication::translate("BBproject", "...", nullptr));
@@ -1297,10 +1297,8 @@ public:
         effect9->setText(QCoreApplication::translate("BBproject", "...", nullptr));
         effect10->setText(QCoreApplication::translate("BBproject", "...", nullptr));
         label_23->setText(QCoreApplication::translate("BBproject", "\320\242\320\265\320\272\321\201\321\202, \320\277\320\276\320\272\320\260 \320\275\320\265 \321\202\321\200\320\276\320\263\320\260\320\265\320\274", nullptr));
-        info->setTitle(QCoreApplication::translate("BBproject", "\320\241\320\277\321\200\320\260\320\262\320\272\320\260", nullptr));
         view->setTitle(QCoreApplication::translate("BBproject", "\320\222\320\270\320\264", nullptr));
         theme_color->setTitle(QCoreApplication::translate("BBproject", "\320\246\320\262\320\265\321\202 \321\202\320\265\320\274\321\213", nullptr));
-        settings->setTitle(QCoreApplication::translate("BBproject", "\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270", nullptr));
         file->setTitle(QCoreApplication::translate("BBproject", "\320\244\320\260\320\271\320\273", nullptr));
     } // retranslateUi
 

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>BBproject</string>
+   <string>Blue Lines</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="image_label">
@@ -21,7 +21,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>60</y>
+      <y>64</y>
       <width>1200</width>
       <height>675</height>
      </rect>
@@ -89,7 +89,7 @@
        </property>
        <property name="icon">
         <iconset>
-         <normalon>:/icons/free-icon-font-cursor-3914590.png</normalon>
+         <normalon>:/icons/cursor.png</normalon>
         </iconset>
        </property>
        <property name="iconSize">
@@ -122,7 +122,7 @@
        </property>
        <property name="icon">
         <iconset>
-         <normalon>:/icons/free-icon-font-eraser-10435280.png</normalon>
+         <normalon>:/icons/eraser.png</normalon>
         </iconset>
        </property>
        <property name="iconSize">
@@ -153,7 +153,7 @@
        <property name="icon">
         <iconset>
          <normaloff>img/resources.svg</normaloff>
-         <normalon>:/icons/free-icon-font-resources-3916746.png</normalon>img/resources.svg</iconset>
+         <normalon>:/icons/shapes.png</normalon>img/resources.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -179,7 +179,7 @@
        </property>
        <property name="icon">
         <iconset>
-         <normalon>:/icons/free-icon-font-paint-brush-3914857.png</normalon>
+         <normalon>:/icons/brush.png</normalon>
         </iconset>
        </property>
        <property name="iconSize">
@@ -206,7 +206,7 @@
        </property>
        <property name="icon">
         <iconset>
-         <normalon>:/icons/free-icon-font-fill-3914163.png</normalon>
+         <normalon>:/icons/fill.png</normalon>
         </iconset>
        </property>
        <property name="iconSize">
@@ -233,7 +233,7 @@
        </property>
        <property name="icon">
         <iconset>
-         <normalon>:/icons/free-icon-font-customization-14644589.png</normalon>
+         <normalon>:/icons/effects.png</normalon>
         </iconset>
        </property>
        <property name="iconSize">
@@ -249,6 +249,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="text_red">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
          <horstretch>2</horstretch>
@@ -263,7 +266,7 @@
        </property>
        <property name="icon">
         <iconset>
-         <normalon>:/icons/free-icon-font-message-text-9821604.png</normalon>
+         <normalon>:/icons/text.png</normalon>
         </iconset>
        </property>
        <property name="iconSize">
@@ -321,7 +324,7 @@
      <bool>true</bool>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="mouse_page">
      <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -360,7 +363,7 @@
            </property>
            <property name="icon">
             <iconset>
-             <normalon>:/icons/free-icon-font-rotate-left-7435142.png</normalon>
+             <normalon>:/icons/rotate-right.png</normalon>
             </iconset>
            </property>
           </widget>
@@ -372,7 +375,7 @@
            </property>
            <property name="icon">
             <iconset>
-             <normalon>:/icons/free-icon-font-rotate-right-3917350.png</normalon>
+             <normalon>:/icons/rotate-left.png</normalon>
             </iconset>
            </property>
           </widget>
@@ -395,7 +398,7 @@
            </property>
            <property name="icon">
             <iconset>
-             <normalon>:/icons/free-icon-font-reflect-horizontal-9291725.png</normalon>
+             <normalon>:/icons/reflect-vertical.png</normalon>
             </iconset>
            </property>
           </widget>
@@ -407,7 +410,7 @@
            </property>
            <property name="icon">
             <iconset>
-             <normalon>:/icons/free-icon-font-reflect-vertical-9291729.png</normalon>
+             <normalon>:/icons/reflect_horizontal.png</normalon>
             </iconset>
            </property>
           </widget>
@@ -478,7 +481,7 @@
              </property>
              <property name="icon">
               <iconset>
-               <normalon>:/icons/free-icon-font-circle-3916847.png</normalon>
+               <normalon>:/icons/square.png</normalon>
               </iconset>
              </property>
             </widget>
@@ -490,7 +493,7 @@
              </property>
              <property name="icon">
               <iconset resource="img/icons.qrc">
-               <normaloff>:/icons/free-icon-font-square-3916926.png</normaloff>:/icons/free-icon-font-square-3916926.png</iconset>
+               <normaloff>:/icons/circle.png</normaloff>:/icons/circle.png</iconset>
              </property>
              <property name="checkable">
               <bool>true</bool>
@@ -558,49 +561,49 @@
        <item>
         <layout class="QGridLayout" name="shape_modes">
          <item row="0" column="1">
-          <widget class="QToolButton" name="shape2">
+          <widget class="QToolButton" name="shape_spline">
            <property name="text">
             <string/>
            </property>
            <property name="icon">
             <iconset>
-             <normalon>:/icons/free-icon-font-triangle-5528184.png</normalon>
+             <normalon>:/icons/spline.png</normalon>
             </iconset>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QToolButton" name="shape7">
+          <widget class="QToolButton" name="shape_star">
            <property name="text">
             <string>...</string>
            </property>
            <property name="icon">
-            <iconset>
-             <normalon>:/icons/free-icon-font-curve-alt-15005293.png</normalon>
-            </iconset>
+            <iconset resource="img/icons.qrc">
+             <normaloff>:/icons/star.png</normaloff>
+             <normalon>:/icons/free-icon-font-curve-alt-15005293.png</normalon>:/icons/star.png</iconset>
            </property>
           </widget>
          </item>
          <item row="0" column="4">
-          <widget class="QToolButton" name="shape5">
+          <widget class="QToolButton" name="shape_rectangle">
            <property name="text">
             <string>...</string>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>img/star.svg</normaloff>
-             <normalon>:/icons/free-icon-font-star-3916591.png</normalon>img/star.svg</iconset>
+            <iconset resource="img/icons.qrc">
+             <normaloff>:/icons/rectangle.png</normaloff>
+             <normalon>:/icons/free-icon-font-star-3916591.png</normalon>:/icons/rectangle.png</iconset>
            </property>
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QToolButton" name="shape1">
+          <widget class="QToolButton" name="shape_line">
            <property name="text">
             <string/>
            </property>
            <property name="icon">
             <iconset>
-             <normalon>:/icons/free-icon-font-circle-3916847.png</normalon>
+             <normalon>:/icons/line.png</normalon>
             </iconset>
            </property>
            <property name="checkable">
@@ -612,25 +615,26 @@
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QToolButton" name="shape3">
+          <widget class="QToolButton" name="shape_circle">
            <property name="text">
             <string>...</string>
            </property>
            <property name="icon">
-            <iconset resource="img/icons.qrc">
-             <normaloff>:/icons/free-icon-font-square-3916926.png</normaloff>:/icons/free-icon-font-square-3916926.png</iconset>
+            <iconset>
+             <normaloff>:/icons/free-icon-font-square-3916926.png</normaloff>
+             <normalon>:/icons/circle.png</normalon>:/icons/free-icon-font-square-3916926.png</iconset>
            </property>
           </widget>
          </item>
          <item row="0" column="3">
-          <widget class="QToolButton" name="shape4">
+          <widget class="QToolButton" name="shape_square">
            <property name="text">
             <string>...</string>
            </property>
            <property name="icon">
             <iconset>
              <normaloff>img/rectangle-horizontal.svg</normaloff>
-             <normalon>:/icons/free-icon-font-rectangle-horizontal-3916918.png</normalon>img/rectangle-horizontal.svg</iconset>
+             <normalon>:/icons/square.png</normalon>img/rectangle-horizontal.svg</iconset>
            </property>
           </widget>
          </item>
@@ -642,14 +646,14 @@
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QToolButton" name="shape6">
+          <widget class="QToolButton" name="shape_triangle">
            <property name="text">
             <string>...</string>
            </property>
            <property name="icon">
-            <iconset>
-             <normalon>:/icons/free-icon-font-slash.png</normalon>
-            </iconset>
+            <iconset resource="img/icons.qrc">
+             <normaloff>:/icons/triangle.png</normaloff>
+             <normalon>:/icons/free-icon-font-slash.png</normalon>:/icons/triangle.png</iconset>
            </property>
           </widget>
          </item>
@@ -1396,12 +1400,6 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="info">
-    <property name="title">
-     <string>Справка</string>
-    </property>
-    <addaction name="about"/>
-   </widget>
    <widget class="QMenu" name="view">
     <property name="title">
      <string>Вид</string>
@@ -1413,14 +1411,7 @@
      <addaction name="light"/>
      <addaction name="dark"/>
     </widget>
-    <addaction name="grid"/>
     <addaction name="theme_color"/>
-   </widget>
-   <widget class="QMenu" name="settings">
-    <property name="title">
-     <string>Настройки</string>
-    </property>
-    <addaction name="hide_tool_bar"/>
    </widget>
    <widget class="QMenu" name="file">
     <property name="title">
@@ -1433,8 +1424,6 @@
    </widget>
    <addaction name="file"/>
    <addaction name="view"/>
-   <addaction name="settings"/>
-   <addaction name="info"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action">
@@ -1485,14 +1474,6 @@
     <string>Размер панели инструментов</string>
    </property>
   </action>
-  <action name="hide_tool_bar">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Скрыть панель инструментов</string>
-   </property>
-  </action>
   <action name="action_15">
    <property name="text">
     <string>Светлая</string>
@@ -1511,6 +1492,16 @@
   <action name="dark">
    <property name="text">
     <string>Темная</string>
+   </property>
+  </action>
+  <action name="top">
+   <property name="text">
+    <string>Сверху</string>
+   </property>
+  </action>
+  <action name="left">
+   <property name="text">
+    <string>Слева</string>
    </property>
   </action>
  </widget>

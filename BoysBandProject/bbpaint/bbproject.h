@@ -54,6 +54,10 @@ private slots:
     void color_line_edit();
 
 
+    void on_light_triggered();
+
+    void on_dark_triggered();
+
 private:
     Ui::BBproject *ui;
     QPixmap *image;

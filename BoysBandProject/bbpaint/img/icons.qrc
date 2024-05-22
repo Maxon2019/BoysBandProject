@@ -1,25 +1,42 @@
 <RCC>
     <qresource prefix="/icons">
-        <file>star-of-david.png</file>
         <file>mars-double.png</file>
         <file>icons.qrc</file>
-        <file>free-icon-font-triangle-5528184.png</file>
-        <file>free-icon-font-star-3916591.png</file>
-        <file>free-icon-font-square-3916926.png</file>
-        <file>free-icon-font-rotate-right-3917350.png</file>
-        <file>free-icon-font-rotate-left-7435142.png</file>
-        <file>free-icon-font-resources-3916746.png</file>
-        <file>free-icon-font-reflect-vertical-9291729.png</file>
-        <file>free-icon-font-reflect-horizontal-9291725.png</file>
-        <file>free-icon-font-rectangle-horizontal-3916918.png</file>
-        <file>free-icon-font-paint-brush-3914857.png</file>
-        <file>free-icon-font-message-text-9821604.png</file>
-        <file>free-icon-font-eraser-10435280.png</file>
-        <file>free-icon-font-fill-3914163.png</file>
-        <file>free-icon-font-customization-14644589.png</file>
-        <file>free-icon-font-circle-3916847.png</file>
-        <file>free-icon-font-slash.png</file>
-        <file>free-icon-font-curve-alt-15005293.png</file>
-        <file>free-icon-font-cursor-3914590.png</file>
+        <file>triangle.png</file>
+        <file>star.png</file>
+        <file>square.png</file>
+        <file>rotate-right.png</file>
+        <file>rotate-left.png</file>
+        <file>reflect-vertical.png</file>
+        <file>reflect_horizontal.png</file>
+        <file>rectangle.png</file>
+        <file>brush.png</file>
+        <file>text.png</file>
+        <file>eraser.png</file>
+        <file>fill.png</file>
+        <file>circle.png</file>
+        <file>line.png</file>
+        <file>spline.png</file>
+        <file>cursor.png</file>
+        <file>cursor-white.png</file>
+        <file>triangle-white.png</file>
+        <file>text-white.png</file>
+        <file>star-white.png</file>
+        <file>square-white.png</file>
+        <file>spline-white.png</file>
+        <file>rotate-right-white.png</file>
+        <file>rotate-left-white.png</file>
+        <file>reflect-vertical-white.png</file>
+        <file>reflect-horizontal-white.png</file>
+        <file>rectangle-white.png</file>
+        <file>line-white.png</file>
+        <file>fill-white.png</file>
+        <file>eraser-white.png</file>
+        <file>circle-white.png</file>
+        <file>brush-white.png</file>
+        <file>shapes-white.png</file>
+        <file>shapes.png</file>
+        <file>effects-white.png</file>
+        <file>effects.png</file>
     </qresource>
 </RCC>

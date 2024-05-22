@@ -3,7 +3,11 @@
 #include "ui_bbproject.h"
 #include <iostream>
 
-QColor image_default_color{255, 255, 255};
+
+QColor lightGray{235, 235, 235};
+QColor darkGray{50, 50, 50};
+QPalette light_palette(lightGray, lightGray);
+QPalette dark_palette(darkGray, darkGray);
 QSize image_default_size{1200, 675};
 const int default_brush_thickness = 20;
 const int default_eraser_size = 20;
@@ -15,12 +19,14 @@ BBproject::BBproject(QWidget *parent)
 {
     this->setWindowTitle("Blue Lines");
     this->setWindowIcon(QIcon(":/icons/mars-double.png"));
+    this->setPalette(light_palette);
+//    this->setPalette(light_palette);
     ui->setupUi(this);
     er_size = default_eraser_size;
     br_thickness = default_brush_thickness;
     fill_shape = false;
     image = new QPixmap(image_default_size);
-    image->fill(image_default_color);
+    image->fill(Qt::white);
     ui->image_label->setFixedSize(image->size());
     ui->image_label->setPixmap(*image);
     ui->eraser_size->setText(QString::number(er_size));
@@ -299,9 +305,60 @@ void BBproject::on_close_triggered()
     QPixmap scaled = image->scaled(image_default_size);
     image->~QPixmap();
     image = new QPixmap{scaled};
-    image->fill(image_default_color);
+    image->fill(Qt::white);
     ui->image_label->setFixedSize(image->size());
     ui->image_label->setPixmap(*image);
     path->clear();
 }
 
+
+void BBproject::on_light_triggered()
+{
+    this->setPalette(light_palette);
+    ui->mouse->setIcon(QIcon(":/icons/cursor.png"));
+    ui->eraser->setIcon(QIcon(":/icons/eraser.png"));
+    ui->fill->setIcon(QIcon(":/icons/fill.png"));
+    ui->shapes->setIcon(QIcon(":/icons/shapes.png"));
+    ui->brush->setIcon(QIcon(":/icons/brush.png"));
+    ui->text_red->setIcon(QIcon(":/icons/text.png"));
+    ui->effects->setIcon(QIcon(":/icons/effects.png"));
+    ui->rotate_clockwise->setIcon(QIcon(":/icons/rotate-right.png"));
+    ui->rotate_counterclockwise->setIcon(QIcon(":/icons/rotate-left.png"));
+    ui->horizontal_mirror->setIcon(QIcon(":/icons/reflect-horizontal.png"));
+    ui->vertical_mirror->setIcon(QIcon(":/icons/reflect-vertical.png"));
+    ui->eraser_circle->setIcon(QIcon(":/icons/circle.png"));
+    ui->eraser_square->setIcon(QIcon(":/icons/square.png"));
+    ui->shape_line->setIcon(QIcon(":/icons/line.png"));
+    ui->shape_spline->setIcon(QIcon(":/icons/spline.png"));
+    ui->shape_circle->setIcon(QIcon(":/icons/circle.png"));
+    ui->shape_square->setIcon(QIcon(":/icons/square.png"));
+    ui->shape_rectangle->setIcon(QIcon(":/icons/rectangle.png"));
+    ui->shape_triangle->setIcon(QIcon(":/icons/triangle.png"));
+    ui->shape_star->setIcon(QIcon(":/icons/star.png"));
+}
+
+
+void BBproject::on_dark_triggered()
+{
+    this->setPalette(dark_palette);
+    ui->mouse->setIcon(QIcon(":/icons/cursor-white.png"));
+    ui->eraser->setIcon(QIcon(":/icons/eraser-white.png"));
+    ui->fill->setIcon(QIcon(":/icons/fill-white.png"));
+    ui->shapes->setIcon(QIcon(":/icons/shapes-white.png"));
+    ui->brush->setIcon(QIcon(":/icons/brush-white.png"));
+    ui->text_red->setIcon(QIcon(":/icons/text-white.png"));
+    ui->effects->setIcon(QIcon(":/icons/effects-white.png"));
+    ui->rotate_clockwise->setIcon(QIcon(":/icons/rotate-right-white.png"));
+    ui->rotate_counterclockwise->setIcon(QIcon(":/icons/rotate-left-white.png"));
+    ui->horizontal_mirror->setIcon(QIcon(":/icons/reflect-horizontal-white.png"));
+    ui->vertical_mirror->setIcon(QIcon(":/icons/reflect-vertical-white.png"));
+    ui->eraser_circle->setIcon(QIcon(":/icons/circle-white.png"));
+    ui->eraser_square->setIcon(QIcon(":/icons/square-white.png"));
+    ui->shape_line->setIcon(QIcon(":/icons/line-white.png"));
+    ui->shape_spline->setIcon(QIcon(":/icons/spline-white.png"));
+    ui->shape_circle->setIcon(QIcon(":/icons/circle-white.png"));
+    ui->shape_square->setIcon(QIcon(":/icons/square-white.png"));
+    ui->shape_rectangle->setIcon(QIcon(":/icons/rectangle-white.png"));
+    ui->shape_triangle->setIcon(QIcon(":/icons/triangle-white.png"));
+    ui->shape_star->setIcon(QIcon(":/icons/star-white.png"));
+}
