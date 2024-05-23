@@ -205,7 +205,7 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
         if(circle_style){
             QBrush bb(Qt::white, Qt::SolidPattern);
             pnt.setBrush(bb);
-            pnt.drawEllipse(b,(int)myPen.widthF(),(int)myPen.widthF());
+            pnt.drawEllipse(b,(int)myPen.widthF()/4,(int)myPen.widthF()/4);
         }
         else pnt.drawLine(a,b);
         break;

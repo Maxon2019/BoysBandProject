@@ -9,8 +9,8 @@ QColor darkGray{50, 50, 50};
 QPalette light_palette(lightGray, lightGray);
 QPalette dark_palette(darkGray, darkGray);
 QSize image_default_size{1200, 675};
-const int default_brush_thickness = 20;
-const int default_eraser_size = 20;
+const int default_brush_thickness = 7;
+const int default_eraser_size = 7;
 const char * supported_formats{"Images (*.png *.xpm *.jpg *.bmp *.jpeg)"};
 
 BBproject::BBproject(QWidget *parent)
@@ -47,18 +47,18 @@ BBproject::~BBproject()
 }
 
 void BBproject::uncheck_buttons(QLayout *container){
-    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>();
+    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>(Qt::FindDirectChildrenOnly);
     for(auto unit : list) {unit->setChecked(false); unit->setCheckable(false);}
 }
 
 int BBproject::get_checked_button(QLayout *container){
-    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>();
+    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>(Qt::FindDirectChildrenOnly);
     for(auto unit : list) {if(unit->isChecked()) return list.indexOf(unit);}
     return -1;
 }
 
 void BBproject::connect_buttons(QLayout *container, const char* slot){
-    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>();
+    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>(Qt::FindDirectChildrenOnly);
     for(auto unit : list) connect(unit, SIGNAL(clicked()), slot);
 }
 
@@ -67,7 +67,7 @@ void BBproject::connect_colors(){
     ui->brush_color_setter->insertWidget(0, cw1);
     connect(cw1, SIGNAL(colorSelected(QColor)), SLOT(color_switched()));
 
-    color_widgets::ColorWheel* cw2 = new color_widgets::ColorWheel(ui->shapes_page);
+    color_widgets::ColorWheel* cw2 = new color_widgets::ColorWheel(ui->eraser_page);
     ui->shape_color_setter->insertWidget(0, cw2);
     connect(cw2, SIGNAL(colorSelected(QColor)), SLOT(color_switched()));
 
@@ -167,7 +167,7 @@ void BBproject::clicked_tool(){
             break;
         case 2:
             std::cout<<"switching to shapes tool\n";
-            set_color(ui->shapes_page->findChild<color_widgets::ColorWheel*>()->color(), 0);
+            set_color(ui->eraser_page->findChild<color_widgets::ColorWheel*>()->color(), 0);
             pen.setWidth(3);
             paintwid->setPenWidth(3);
             id = get_checked_button(ui->shape_modes);

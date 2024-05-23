@@ -343,7 +343,10 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_19">
+      <layout class="QHBoxLayout" name="horizontalLayout_19" stretch="0,0">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QStackedWidget" name="tool_stack">
          <property name="sizePolicy">
@@ -536,6 +539,12 @@
                     <normalon>:/icons/square.png</normalon>
                    </iconset>
                   </property>
+                  <property name="checkable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -548,10 +557,10 @@
                     <normaloff>:/icons/circle.png</normaloff>:/icons/circle.png</iconset>
                   </property>
                   <property name="checkable">
-                   <bool>true</bool>
+                   <bool>false</bool>
                   </property>
                   <property name="checked">
-                   <bool>true</bool>
+                   <bool>false</bool>
                   </property>
                  </widget>
                 </item>
@@ -1507,7 +1516,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>935</width>
+            <width>945</width>
             <height>598</height>
            </rect>
           </property>
