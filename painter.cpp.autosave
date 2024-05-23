@@ -1,0 +1,60 @@
+#include "painter.h"
+
+painter::painter(QWidget *parent) : QWidget(parent)
+{
+    isDrawing=false;
+    BrushShape=bshEllipse;
+    ActiveTool=ttLine;
+}
+
+painter::~painter()
+{
+
+}
+
+painter::MousePressEvent(QMouseEvent *event)
+{
+    MP1=event->pos();
+    isDrawing=true;
+    MP2=MP1;
+    update();
+
+}
+
+painter::MouseMoveEvent(QMouseEvent *event)
+{
+    int BrushRadius;
+    if (isDrawing)
+    {
+        switch (ActiveTool)
+        case ttLine:
+        {
+
+            break;
+        }
+    }
+
+}
+
+painter::MouseReleaseEvent(QMouseEvent *event)
+{
+    int i;
+    MP2=event->pos();
+    if (isDrawing)
+    {
+        switch (ActiveTool)
+        case ttLine:
+        {
+            
+
+            break;
+        }
+    }
+}
+
+painter::PaintEvent(QPaintEvent *event)
+{
+    QPainter pnt(this);
+    painter.drawImage(dirtyRect, image, dirtyRect);
+}
+
