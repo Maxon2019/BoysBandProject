@@ -25,10 +25,12 @@ BBproject::BBproject(QWidget *parent)
     er_size = default_eraser_size;
     br_thickness = default_brush_thickness;
     fill_shape = false;
-    image = new QPixmap(image_default_size);
-    image->fill(Qt::white);
-    ui->image_label->setFixedSize(image->size());
-    ui->image_label->setPixmap(*image);
+    paintwid = new PaintWidget(parent);
+    ui->verticalLayout->addWidget(paintwid);
+    // image = new QPixmap(image_default_size);
+    // image->fill(Qt::white);
+    // ui->image_label->setFixedSize(image->size());
+    // ui->image_label->setPixmap(*image);
     ui->eraser_size->setText(QString::number(er_size));
     ui->brush_thickness->setText(QString::number(br_thickness));
     connect(ui->shape_fill, SIGNAL(stateChanged(int)), SLOT(fill_switched()));
@@ -53,6 +55,12 @@ BBproject::~BBproject()
 void BBproject::uncheck_buttons(QLayout *container){
     QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>();
     for(auto unit : list) {unit->setChecked(false); unit->setCheckable(false);}
+}
+
+int BBproject::get_checked_button(QLayout *container){
+    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>();
+    for(auto unit : list) {if(unit->isChecked()) return list.indexOf(unit);}
+    return -1;
 }
 
 void BBproject::connect_buttons(QLayout *container, const char* slot){
@@ -87,15 +95,10 @@ void BBproject::connect_colors(){
 }
 
 void BBproject::set_color(QColor color, int index){
-    //here you do stuff with setting color, index is index of qStackedWidget page, aka tool id
-    switch(index){
-    case 0:
-
-        break;
-    default:
-
-        break;
-    }
+    pen.setColor(color);
+    brush.setColor(color);
+    paintwid->setPen(pen);
+    paintwid->setBrush(brush);
 }
 
 void BBproject::color_switched(){
@@ -151,6 +154,7 @@ void BBproject::color_line_edit(){
 
 void BBproject::clicked_tool(){
     QToolButton *b = qobject_cast<QToolButton*>(sender());
+    int id;
     if(!b->isCheckable()){
         uncheck_buttons(ui->buttons);
         b->setCheckable(true);
@@ -159,24 +163,68 @@ void BBproject::clicked_tool(){
         switch (ui->buttons->indexOf(b)) {
         case 0:
             std::cout<<"switching to mouse tool\n";
+            paintwid->setActiveTool(-1);
             break;
         case 1:
             std::cout<<"switching to eraser tool\n";
+            paintwid->setActiveTool(5);
+            pen.setWidth(er_size);
+            paintwid->setPenWidth(er_size);
             break;
         case 2:
             std::cout<<"switching to shapes tool\n";
+            set_color(ui->shapes_page->findChild<color_widgets::ColorWheel*>()->color(), 0);
+            pen.setWidth(3);
+            paintwid->setPenWidth(3);
+            id = get_checked_button(ui->shape_modes);
+            switch (id) {
+            case 0:
+                paintwid->setActiveTool(1);
+                break;
+            case 2:
+                paintwid->setActiveTool(2);
+                break;
+            case 3:
+                paintwid->setActiveTool(3);
+                break;
+            case 4:
+                paintwid->setActiveTool(6);
+                break;
+            default:
+                paintwid->setActiveTool(-1);
+                break;
+            }
             break;
         case 3:
             std::cout<<"switching to brush tool\n";
+            set_color(ui->brush_page->findChild<color_widgets::ColorWheel*>()->color(), 0);
+            pen.setWidth(br_thickness);
+            paintwid->setPenWidth(br_thickness);
+            id = get_checked_button(ui->brush_modes);
+            switch (id) {
+            case 0:
+                paintwid->setActiveTool(4);
+                break;
+            case 1:
+                paintwid->setActiveTool(8);
+                break;
+            default:
+                paintwid->setActiveTool(-1);
+                break;
+            }
             break;
         case 4:
             std::cout<<"switching to fill tool\n";
+            set_color(ui->fill_page->findChild<color_widgets::ColorWheel*>()->color(), 0);
+            paintwid->setActiveTool(7);
             break;
         case 5:
             std::cout<<"switching to effects tool\n";
+            paintwid->setActiveTool(-1);
             break;
         case 6:
             std::cout<<"switching to text editor tool\n";
+            paintwid->setActiveTool(-1);
             break;
         }
     }
@@ -192,9 +240,11 @@ void BBproject::clicked_eraser_mode(){
         switch (ui->eraser_modes->indexOf(b)) {
         case 0:
             std::cout<<"switching to square eraser mode\n";
+            paintwid->circle_style = false;
             break;
         case 1:
             std::cout<<"switching to circle eraser mode\n";
+            paintwid->circle_style = true;
             break;
         }
     }
@@ -208,8 +258,20 @@ void BBproject::clicked_shape_mode(){
         b->setCheckable(true);
         //write here to switch shape
         switch (ui->shape_modes->indexOf(b)) {
+        case 0:
+            paintwid->setActiveTool(1);
+            break;
+        case 2:
+            paintwid->setActiveTool(2);
+            break;
+        case 3:
+            paintwid->setActiveTool(3);
+            break;
+        case 4:
+            paintwid->setActiveTool(6);
+            break;
         default:
-            std::cout<<"shape mode selected\n";
+            paintwid->setActiveTool(-1);
             break;
         }
     }
@@ -223,8 +285,14 @@ void BBproject::clicked_brush_mode(){
         b->setCheckable(true);
         //write here to switch brush
         switch (ui->brush_modes->indexOf(b)) {
+        case 0:
+            paintwid->setActiveTool(4);
+            break;
+        case 1:
+            paintwid->setActiveTool(8);
+            break;
         default:
-            std::cout<<"brush mode selected\n";
+            paintwid->setActiveTool(-1);
             break;
         }
     }
@@ -253,7 +321,8 @@ void BBproject::eraser_edited(){
     if(ok) er_size = res;
     else line->setText(QString::number(er_size));
     std::cout<<"new size is "<<er_size<<"\n";
-    //write here to add functionality
+    pen.setWidth(er_size);
+    paintwid->setPenWidth(er_size);
 }
 
 void BBproject::brush_edited(){
@@ -263,6 +332,8 @@ void BBproject::brush_edited(){
     if(ok) br_thickness = res;
     else line->setText(QString::number(br_thickness));
     std::cout<<"new thickness is "<<br_thickness<<"\n";
+    pen.setWidth(br_thickness);
+    paintwid->setPenWidth(br_thickness);
     //write here to add functionality
 }
 
@@ -270,6 +341,7 @@ void BBproject::fill_switched(){
     QCheckBox* box = qobject_cast<QCheckBox*>(sender());
     fill_shape = box->isChecked();
     std::cout<<"fill property is now "<<fill_shape<<"\n";
+    paintwid->filling = fill_shape;
     //write here to add functionality
 }
 

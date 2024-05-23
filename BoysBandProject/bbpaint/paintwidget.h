@@ -19,6 +19,7 @@ public:
     int ActiveTool;
     int BrushSize;
     int PenSize;
+    bool filling, circle_style;
 
     void setImage(QImage newImage);
     QImage getImage();

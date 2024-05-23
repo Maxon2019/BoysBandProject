@@ -1,7 +1,9 @@
 #ifndef BBPROJECT_H
 #define BBPROJECT_H
 
+#include "QtGui/qpen.h"
 #include "QtWidgets/qboxlayout.h"
+#include "paintwidget.h"
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QString>
@@ -23,6 +25,7 @@ public:
     BBproject(QWidget *parent = nullptr);
     ~BBproject();
     void uncheck_buttons(QLayout *container);
+    int get_checked_button(QLayout *container);
     void connect_buttons(QLayout *container, const char* slot);
     void addListItem(QHBoxLayout** list, int &count);
     void connect_colors();
@@ -64,5 +67,8 @@ private:
     QString *path;
     int er_size, br_thickness;
     bool fill_shape;
+    QPen pen;
+    QBrush brush;
+    PaintWidget *paintwid;
 };
 #endif // BBPROJECT_H

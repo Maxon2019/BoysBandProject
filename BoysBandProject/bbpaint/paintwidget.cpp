@@ -7,6 +7,8 @@ PaintWidget::PaintWidget(QWidget *parent) : QWidget(parent)
 {
     setAttribute(Qt::WA_StaticContents);
     isDrawing=false;
+    filling = false;
+    circle_style = false;
     //BrushShape=bshEllipse;
 
     myPen=QPen(Qt::black,1,Qt::SolidLine);
@@ -166,7 +168,7 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
 {
     QPainter pnt(&image);
     pnt.setPen(myPen);
-    pnt.setBrush(myBrush);
+    if (filling) pnt.setBrush(myBrush);
     switch (ActiveTool)
     {
     case 1:
@@ -176,12 +178,12 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
     }
         case 4:
     {
-        QColor brClr;
-        brClr=myPen.color();
-        QBrush bb(brClr, Qt::SolidPattern);
-        pnt.setBrush(bb);
-        pnt.drawEllipse(b,myPen.widthF(),myPen.widthF());
-        //pnt.drawLine(a,b);
+        // QColor brClr;
+        // brClr=myPen.color();
+        // QBrush bb(brClr, Qt::SolidPattern);
+        // pnt.setBrush(bb);
+        // pnt.drawEllipse(b,(int)myPen.widthF(),(int)myPen.widthF());
+        pnt.drawLine(a,b);
         break;
     }
     case 2:
@@ -198,8 +200,13 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
     {
         QPen whitePen(Qt::white);
         whitePen.setWidth(myPen.widthF());
-        pnt.setPen(whitePen);;
-        pnt.drawLine(a,b);
+        pnt.setPen(whitePen);
+        if(circle_style){
+            QBrush bb(Qt::white, Qt::SolidPattern);
+            pnt.setBrush(bb);
+            pnt.drawEllipse(b,(int)myPen.widthF(),(int)myPen.widthF());
+        }
+        else pnt.drawLine(a,b);
         break;
     }
     case 6:
