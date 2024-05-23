@@ -35,8 +35,8 @@
         <file>circle-white.png</file>
         <file>brush-white.png</file>
         <file>shapes-white.png</file>
-        <file>shapes.png</file>
         <file>effects-white.png</file>
         <file>effects.png</file>
+        <file>shapes.png</file>
     </qresource>
 </RCC>
