@@ -43,6 +43,7 @@ void PaintWidget::setActiveTool(int activeTool)
 
 void PaintWidget::clearAll()
 {
+    image=QImage(1500,1500,QImage::Format_ARGB32_Premultiplied) ;
     image.fill(qRgb(255, 255, 255));
     update();
 }

@@ -10,6 +10,7 @@
 #include <QPixmap>
 #include <QLabel>
 #include <QAbstractButton>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -56,10 +57,11 @@ private slots:
 
     void color_line_edit();
 
-
     void on_light_triggered();
 
     void on_dark_triggered();
+
+    void closeEvent(QCloseEvent *);
 
 private:
     Ui::BBproject *ui;

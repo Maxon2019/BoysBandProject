@@ -20,17 +20,12 @@ BBproject::BBproject(QWidget *parent)
     this->setWindowTitle("Blue Lines");
     this->setWindowIcon(QIcon(":/icons/mars-double.png"));
     this->setPalette(light_palette);
-//    this->setPalette(light_palette);
     ui->setupUi(this);
     er_size = default_eraser_size;
     br_thickness = default_brush_thickness;
     fill_shape = false;
     paintwid = new PaintWidget(parent);
-    ui->verticalLayout->addWidget(paintwid);
-    // image = new QPixmap(image_default_size);
-    // image->fill(Qt::white);
-    // ui->image_label->setFixedSize(image->size());
-    // ui->image_label->setPixmap(*image);
+    ui->scrollArea->setWidget(paintwid);
     ui->eraser_size->setText(QString::number(er_size));
     ui->brush_thickness->setText(QString::number(br_thickness));
     connect(ui->shape_fill, SIGNAL(stateChanged(int)), SLOT(fill_switched()));
@@ -48,7 +43,6 @@ BBproject::BBproject(QWidget *parent)
 BBproject::~BBproject()
 {
     delete ui;
-    image->~QPixmap();
     path->~QString();
 }
 
@@ -347,40 +341,63 @@ void BBproject::fill_switched(){
 
 void BBproject::on_open_triggered()
 {
+    if (!path->isNull()){
+        QMessageBox* saveMessage = new QMessageBox(QMessageBox::Question,
+                                                   tr("Внимание"),
+                                                   tr("Сохранить изменения в открытом файле?"),
+                                                   QMessageBox::Yes | QMessageBox::No |QMessageBox::Cancel);
+        saveMessage->setWindowIcon(QIcon(":/icons/double_mars.png"));
+        int n = saveMessage->exec();
+        delete saveMessage;
+        if (n == QMessageBox::Yes)
+            on_save_triggered();
+        if (n == QMessageBox::Cancel)
+            return;
+    }
     *path = QFileDialog::getOpenFileName(this,
-                                        tr("Open File"),
-                                        "/home",
+                                        tr("Открыть файл"),
+                                        tr("/home"),
                                         tr(supported_formats));
-    image->load(*path);
-    ui->image_label->setFixedSize(image->size());
-    ui->image_label->setPixmap(*image);
+    paintwid->setImage(QImage(*path));
 }
 
 void BBproject::on_save_triggered()
 {
-    image->save(*path);
+    if (path->isNull()){
+        on_save_as_triggered();
+        return;
+    }
+    paintwid->getImage().save(*path);
 }
 
 
 void BBproject::on_save_as_triggered()
 {
     *path = QFileDialog::getSaveFileName(this,
-                                         tr("Save File"),
+                                         tr("Сохранить файл"),
                                          *path,
                                          tr(supported_formats));
-    image->save(*path);
+    paintwid->getImage().save(*path);
 }
 
 
 void BBproject::on_close_triggered()
 {
-    QPixmap scaled = image->scaled(image_default_size);
-    image->~QPixmap();
-    image = new QPixmap{scaled};
-    image->fill(Qt::white);
-    ui->image_label->setFixedSize(image->size());
-    ui->image_label->setPixmap(*image);
+    if (!path->isNull()){
+        QMessageBox* saveMessage = new QMessageBox(QMessageBox::Question,
+                                                   tr("Внимание"),
+                                                   tr("Сохранить изменения перед закрытием?"),
+                                                   QMessageBox::Yes | QMessageBox::No |QMessageBox::Cancel);
+        saveMessage->setWindowIcon(QIcon(":/icons/double_mars.png"));
+        int n = saveMessage->exec();
+        delete saveMessage;
+        if (n == QMessageBox::Yes)
+            on_save_triggered();
+        if (n == QMessageBox::Cancel)
+            return;
+    }
     path->clear();
+    paintwid->clearAll();
 }
 
 
@@ -433,4 +450,24 @@ void BBproject::on_dark_triggered()
     ui->shape_rectangle->setIcon(QIcon(":/icons/rectangle-white.png"));
     ui->shape_triangle->setIcon(QIcon(":/icons/triangle-white.png"));
     ui->shape_star->setIcon(QIcon(":/icons/star-white.png"));
+}
+
+void BBproject::closeEvent(QCloseEvent *event)
+{
+    if (!path->isNull()){
+        QMessageBox* saveMessage = new QMessageBox(QMessageBox::Question,
+                                                   tr("Внимание"),
+                                                   tr("Сохранить изменения перед выходом?"),
+                                                   QMessageBox::Yes | QMessageBox::No |QMessageBox::Cancel);
+        saveMessage->setWindowIcon(QIcon(":/icons/double_mars.png"));
+        int n = saveMessage->exec();
+        delete saveMessage;
+        if (n == QMessageBox::Yes)
+            on_save_triggered();
+        if (n == QMessageBox::Cancel){
+            event->ignore();
+            return;
+        }
+        event->accept();
+    }
 }
