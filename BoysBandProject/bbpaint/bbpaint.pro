@@ -12,10 +12,12 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    bbproject.cpp
+    bbproject.cpp \
+    paintwidget.cpp
 
 HEADERS += \
-    bbproject.h
+    bbproject.h \
+    paintwidget.h
 
 FORMS += \
     bbproject.ui
