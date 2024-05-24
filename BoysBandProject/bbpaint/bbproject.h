@@ -37,6 +37,7 @@ public:
     void uncheck_buttons_l(QLayout *container);
     void connect_buttons_l(QLayout *container, const char* slot);
     int get_checked_button_l(QLayout *container);
+    void connect_all();
 
 private slots:
     void on_open_triggered();
@@ -63,6 +64,11 @@ private slots:
     void color_switched();
 
     void color_line_edit();
+
+    void rotate_clockwise_clicked();
+    void rotate_counter_clockwise_clicked();
+    void mirror_hor_clicked();
+    void mirror_ver_clicked();
 
     void on_light_triggered();
 

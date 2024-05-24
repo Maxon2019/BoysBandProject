@@ -28,15 +28,7 @@ BBproject::BBproject(QWidget *parent)
     ui->verticalLayout_2->addWidget(paintwid);
     ui->eraser_size->setText(QString::number(er_size));
     ui->brush_thickness->setText(QString::number(br_thickness));
-    connect(ui->shape_fill, SIGNAL(stateChanged(int)), SLOT(fill_switched()));
-    connect(ui->eraser_size, SIGNAL(editingFinished()), SLOT(eraser_edited()));
-    connect(ui->brush_thickness, SIGNAL(editingFinished()), SLOT(brush_edited()));
-    connect_buttons(ui->buttons, SLOT(clicked_tool()));
-    connect_buttons(ui->eraser_modes, SLOT(clicked_eraser_mode()));
-    connect_buttons(ui->shape_modes, SLOT(clicked_shape_mode()));
-    connect_buttons(ui->brush_modes, SLOT(clicked_brush_mode()));
-    connect_buttons_l(ui->fill_effects, SLOT(clicked_fill_effect_mode()));
-    connect_buttons_l(ui->outline_effects, SLOT(clicked_outline_effect_mode()));
+    connect_all();
     path = new QString;
     connect_colors();
     drawBtnIcons();
@@ -70,6 +62,22 @@ void BBproject::uncheck_buttons_l(QLayout *container){
         unit->setChecked(false);
         unit->setCheckable(false);
     }
+}
+
+void BBproject::connect_all(){
+    connect(ui->shape_fill, SIGNAL(stateChanged(int)), SLOT(fill_switched()));
+    connect(ui->eraser_size, SIGNAL(editingFinished()), SLOT(eraser_edited()));
+    connect(ui->brush_thickness, SIGNAL(editingFinished()), SLOT(brush_edited()));
+    connect_buttons(ui->buttons, SLOT(clicked_tool()));
+    connect_buttons(ui->eraser_modes, SLOT(clicked_eraser_mode()));
+    connect_buttons(ui->shape_modes, SLOT(clicked_shape_mode()));
+    connect_buttons(ui->brush_modes, SLOT(clicked_brush_mode()));
+    connect_buttons_l(ui->fill_effects, SLOT(clicked_fill_effect_mode()));
+    connect_buttons_l(ui->outline_effects, SLOT(clicked_outline_effect_mode()));
+    connect(ui->rotate_clockwise, SIGNAL(clicked(bool)), SLOT(rotate_clockwise_clicked()));
+    connect(ui->rotate_counterclockwise, SIGNAL(clicked(bool)), SLOT(rotate_counter_clockwise_clicked()));
+    connect(ui->horizontal_mirror, SIGNAL(clicked(bool)), SLOT(mirror_hor_clicked()));
+    connect(ui->vertical_mirror, SIGNAL(clicked(bool)), SLOT(mirror_ver_clicked()));
 }
 
 int BBproject::get_checked_button_l(QLayout *container){
@@ -195,20 +203,26 @@ void BBproject::clicked_tool(){
             case 0:
                 paintwid->setActiveTool(1);
                 break;
-            case 2:
+            case 7:
                 paintwid->setActiveTool(2);
                 break;
-            case 3:
+            case 1:
                 paintwid->setActiveTool(3);
                 break;
-            case 4:
+            case 5:
                 paintwid->setActiveTool(4);
                 break;
-            case 5:
+            case 8:
                 paintwid->setActiveTool(5);
                 break;
-            case 7:
+            case 2:
                 paintwid->setActiveTool(7);
+                break;
+            case 3:
+                paintwid->setActiveTool(8);
+                break;
+            case 6:
+                paintwid->setActiveTool(9);
                 break;
             default:
                 paintwid->setActiveTool(-1);
@@ -224,16 +238,16 @@ void BBproject::clicked_tool(){
             case 0:
                 paintwid->setActiveTool(103);
                 break;
-            case 1:
+            case 4:
                 paintwid->setActiveTool(102);
-                break;
-            case 2:
-                paintwid->setActiveTool(103);
                 break;
             case 3:
                 paintwid->setActiveTool(103);
                 break;
-            case 4:
+            case 2:
+                paintwid->setActiveTool(103);
+                break;
+            case 1:
                 paintwid->setActiveTool(103);
                 break;
             default:
@@ -289,22 +303,26 @@ void BBproject::clicked_shape_mode(){
         case 0:
             paintwid->setActiveTool(1);
             break;
-//        case 1: star
-//            break;
-        case 2:
+        case 7:
             paintwid->setActiveTool(2);
             break;
-        case 3:
+        case 1:
             paintwid->setActiveTool(3);
             break;
-        case 4:
+        case 5:
             paintwid->setActiveTool(4);
             break;
-        case 5:
+        case 8:
             paintwid->setActiveTool(5);
             break;
-        case 7:
+        case 2:
             paintwid->setActiveTool(7);
+            break;
+        case 3:
+            paintwid->setActiveTool(8);
+            break;
+        case 6:
+            paintwid->setActiveTool(9);
             break;
         default:
             paintwid->setActiveTool(-1);
@@ -325,19 +343,19 @@ void BBproject::clicked_brush_mode(){
             paintwid->setActiveTool(103);
             paintwid->pen_type = 0;
             break;
-        case 1:
+        case 4:
             paintwid->setActiveTool(102);
             paintwid->pen_type = -1;
             break;
-        case 2:
+        case 3:
             paintwid->setActiveTool(103);
             paintwid->pen_type = 1;
             break;
-        case 3:
+        case 2:
             paintwid->setActiveTool(103);
             paintwid->pen_type = 2;
             break;
-        case 4:
+        case 1:
             paintwid->setActiveTool(103);
             paintwid->pen_type = 3;
             break;
@@ -501,6 +519,21 @@ void BBproject::on_close_triggered()
     paintwid->clearAll();
 }
 
+void BBproject::rotate_clockwise_clicked(){
+
+}
+
+void BBproject::rotate_counter_clockwise_clicked(){
+
+}
+
+void BBproject::mirror_hor_clicked(){
+
+}
+
+void BBproject::mirror_ver_clicked(){
+
+}
 
 void BBproject::on_light_triggered()
 {
@@ -510,7 +543,6 @@ void BBproject::on_light_triggered()
     ui->fill->setIcon(QIcon(":/icons/fill.png"));
     ui->shapes->setIcon(QIcon(":/icons/shapes.png"));
     ui->brush->setIcon(QIcon(":/icons/brush.png"));
-    ui->text_red->setIcon(QIcon(":/icons/text.png"));
     ui->effects->setIcon(QIcon(":/icons/effects.png"));
     ui->rotate_clockwise->setIcon(QIcon(":/icons/rotate-right.png"));
     ui->rotate_counterclockwise->setIcon(QIcon(":/icons/rotate-left.png"));
@@ -543,7 +575,6 @@ void BBproject::on_dark_triggered()
     ui->fill->setIcon(QIcon(":/icons/fill-white.png"));
     ui->shapes->setIcon(QIcon(":/icons/shapes-white.png"));
     ui->brush->setIcon(QIcon(":/icons/brush-white.png"));
-    ui->text_red->setIcon(QIcon(":/icons/text-white.png"));
     ui->effects->setIcon(QIcon(":/icons/effects-white.png"));
     ui->rotate_clockwise->setIcon(QIcon(":/icons/rotate-right-white.png"));
     ui->rotate_counterclockwise->setIcon(QIcon(":/icons/rotate-left-white.png"));

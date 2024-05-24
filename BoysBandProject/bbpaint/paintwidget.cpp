@@ -140,7 +140,7 @@ void PaintWidget::mouseReleaseEvent(QMouseEvent *event)
     {
         switch (ActiveTool)
         {
-        case 1: case 2: case 3: case 4: case 5: case 7:
+        case 1: case 2: case 3: case 4: case 5: case 7: case 8: case 9:
         {
             DrawFigure(MP1,MP2);
             break;
@@ -194,10 +194,32 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
         break;
     case 7:
     {
-        QPoint A{b.x(), a.y()}, B{(a.x()+b.x())/2, b.y()}, C{a};
+        QPoint A{a.x(), b.y()}, B{(a.x()+b.x())/2, a.y()}, C{b};
         QPolygon polygon;
         polygon << A << B << C;
         pnt.drawPolygon(polygon);
+        break;
+    }
+    case 8:
+    {
+        QPoint A{(a.x()+b.x())/2, a.y()}, B{a.x()-24*(a.x()-b.x())/25, a.y()-7*(a.y()-b.y())/20}, C{a.x()-4*(a.x()-b.x())/5, a.y()-9*(a.y()-b.y())/10},
+            D{a.x()-(a.x()-b.x())/5, a.y()-9*(a.y()-b.y())/10}, E{a.x()-(a.x()-b.x())/25, a.y()-7*(a.y()-b.y())/20},
+            F{a.x()-13*(a.x()-b.x())/20, a.y()-7*(a.y()-b.y())/20}, G{a.x()-7*(a.x()-b.x())/10, a.y()-11*(a.y()-b.y())/20}, H{(a.x()+b.x())/2, a.y()-7*(a.y()-b.y())/10},
+            I{a.x()-3*(a.x()-b.x())/10, a.y()-11*(a.y()-b.y())/20}, J{a.x()-7*(a.x()-b.x())/20, a.y()-7*(a.y()-b.y())/20};
+        QPolygon polygon;
+        polygon << A << F << B << G << C << H << D << I << E << J;
+        pnt.drawPolygon(polygon);
+        break;
+    }
+    case 9:
+    {
+        QPoint A{(a.x()+b.x())/2, a.y()}, B{a.x()-19*(a.x()-b.x())/20, a.y()-3*(a.y()-b.y())/4}, C{a.x()-(a.x()-b.x())/20, a.y()-3*(a.y()-b.y())/4},
+            D{(a.x()+b.x())/2, b.y()}, E{b.x()+19*(a.x()-b.x())/20, b.y()+3*(a.y()-b.y())/4}, F{b.x()+(a.x()-b.x())/20, b.y()+3*(a.y()-b.y())/4};
+        QPolygon polygon1, polygon2;
+        polygon1 << A << B << C;
+        polygon2 << D << E << F;
+        pnt.drawPolygon(polygon1);
+        pnt.drawPolygon(polygon2);
         break;
     }
 

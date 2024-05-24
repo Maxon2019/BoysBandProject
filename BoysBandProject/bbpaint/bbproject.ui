@@ -254,51 +254,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="text_red">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>2</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>64</width>
-            <height>64</height>
-           </size>
-          </property>
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normalon>:/icons/text.png</normalon>
-           </iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <property name="popupMode">
-           <enum>QToolButton::DelayedPopup</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
          <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -608,42 +563,6 @@
              </item>
              <item>
               <layout class="QGridLayout" name="shape_modes">
-               <item row="0" column="1">
-                <widget class="QToolButton" name="shape_arrow">
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normalon>:/icons/arrow-white.png</normalon>
-                  </iconset>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QToolButton" name="shape_5star">
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normalon>:/icons/star.png</normalon>
-                  </iconset>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="4">
-                <widget class="QToolButton" name="shape_rectangle">
-                 <property name="text">
-                  <string>...</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="img/icons.qrc">
-                   <normaloff>:/icons/rectangle.png</normaloff>
-                   <normalon>:/icons/free-icon-font-star-3916591.png</normalon>:/icons/rectangle.png</iconset>
-                 </property>
-                </widget>
-               </item>
                <item row="0" column="0">
                 <widget class="QToolButton" name="shape_line">
                  <property name="text">
@@ -662,34 +581,15 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="2">
-                <widget class="QToolButton" name="shape_circle">
+               <item row="0" column="1">
+                <widget class="QToolButton" name="shape_arrow">
                  <property name="text">
-                  <string>...</string>
+                  <string/>
                  </property>
                  <property name="icon">
                   <iconset>
-                   <normalon>:/icons/circle.png</normalon>
+                   <normalon>:/icons/arrow-white.png</normalon>
                   </iconset>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3">
-                <widget class="QToolButton" name="shape_round_rect">
-                 <property name="text">
-                  <string>...</string>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normalon>:/icons/rounded-rectangle.png</normalon>
-                  </iconset>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QToolButton" name="shape12">
-                 <property name="text">
-                  <string>...</string>
                  </property>
                 </widget>
                </item>
@@ -705,21 +605,14 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QToolButton" name="shape11">
-                 <property name="text">
-                  <string>...</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QToolButton" name="shape_6star">
+               <item row="1" column="1">
+                <widget class="QToolButton" name="shape_5star">
                  <property name="text">
                   <string/>
                  </property>
                  <property name="icon">
                   <iconset>
-                   <normalon>:/icons/6star.png</normalon>
+                   <normalon>:/icons/star.png</normalon>
                   </iconset>
                  </property>
                 </widget>
@@ -736,10 +629,51 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="4">
-                <widget class="QToolButton" name="shape10">
+               <item row="0" column="2">
+                <widget class="QToolButton" name="shape_circle">
                  <property name="text">
                   <string>...</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normalon>:/icons/circle.png</normalon>
+                  </iconset>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QToolButton" name="shape_6star">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normalon>:/icons/6star.png</normalon>
+                  </iconset>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="4">
+                <widget class="QToolButton" name="shape_rectangle">
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="img/icons.qrc">
+                   <normaloff>:/icons/rectangle.png</normaloff>
+                   <normalon>:/icons/free-icon-font-star-3916591.png</normalon>:/icons/rectangle.png</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QToolButton" name="shape_round_rect">
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normalon>:/icons/rounded-rectangle.png</normalon>
+                  </iconset>
                  </property>
                 </widget>
                </item>
@@ -940,34 +874,6 @@
              </item>
              <item>
               <layout class="QGridLayout" name="brush_modes">
-               <item row="2" column="1">
-                <widget class="QToolButton" name="brush11">
-                 <property name="text">
-                  <string>...</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QToolButton" name="brush7">
-                 <property name="text">
-                  <string>...</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="5">
-                <widget class="QToolButton" name="brush10">
-                 <property name="text">
-                  <string>...</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QToolButton" name="brush9">
-                 <property name="text">
-                  <string>...</string>
-                 </property>
-                </widget>
-               </item>
                <item row="0" column="1">
                 <widget class="QToolButton" name="pencil">
                  <property name="text">
@@ -986,10 +892,15 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QToolButton" name="brush6">
+               <item row="0" column="2">
+                <widget class="QToolButton" name="highlighter">
                  <property name="text">
                   <string>...</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normalon>:/icons/highlighter.png</normalon>
+                  </iconset>
                  </property>
                 </widget>
                </item>
@@ -1005,32 +916,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="3">
-                <widget class="QToolButton" name="brush8">
-                 <property name="text">
-                  <string>...</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5">
-                <widget class="QToolButton" name="brush_2">
-                 <property name="text">
-                  <string>...</string>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normalon>:/icons/brush-2.png</normalon>
-                  </iconset>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <widget class="QToolButton" name="brush12">
-                 <property name="text">
-                  <string>...</string>
-                 </property>
-                </widget>
-               </item>
                <item row="0" column="4">
                 <widget class="QToolButton" name="brush_1">
                  <property name="text">
@@ -1043,14 +928,14 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="2">
-                <widget class="QToolButton" name="highlighter">
+               <item row="0" column="5">
+                <widget class="QToolButton" name="brush_2">
                  <property name="text">
                   <string>...</string>
                  </property>
                  <property name="icon">
                   <iconset>
-                   <normalon>:/icons/highlighter.png</normalon>
+                   <normalon>:/icons/brush-2.png</normalon>
                   </iconset>
                  </property>
                 </widget>
@@ -1591,21 +1476,6 @@
               </layout>
              </item>
             </layout>
-           </widget>
-          </widget>
-          <widget class="QWidget" name="text_ed_page">
-           <widget class="QLabel" name="label_23">
-            <property name="geometry">
-             <rect>
-              <x>80</x>
-              <y>60</y>
-              <width>161</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Текст, пока не трогаем</string>
-            </property>
            </widget>
           </widget>
          </widget>
