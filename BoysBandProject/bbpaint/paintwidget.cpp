@@ -9,13 +9,14 @@ PaintWidget::PaintWidget(QWidget *parent) : QWidget(parent)
     isDrawing=false;
     filling = false;
     circle_style = false;
+    changed = false;
     //BrushShape=bshEllipse;
 
     myPen=QPen(Qt::black,1,Qt::SolidLine);
     myBrush=QBrush(Qt::white, Qt::SolidPattern);
     BrushRadius=20;
 
-    image=QImage(1500,1500,QImage::Format_ARGB32_Premultiplied) ;
+    image=QImage(1600 ,900 ,QImage::Format_ARGB32_Premultiplied) ;
     image.fill(qRgb(255, 255, 255));
 }
 
@@ -43,7 +44,7 @@ void PaintWidget::setActiveTool(int activeTool)
 
 void PaintWidget::clearAll()
 {
-    image=QImage(1500,1500,QImage::Format_ARGB32_Premultiplied) ;
+    image=QImage(1600 ,900 ,QImage::Format_ARGB32_Premultiplied) ;
     image.fill(qRgb(255, 255, 255));
     update();
 }
@@ -101,24 +102,13 @@ void PaintWidget::mouseMoveEvent(QMouseEvent *event)
     {
         switch (ActiveTool)
         {
-        case 4:
-        {
-            DrawFigure(event->pos(),event->pos());
-            break;
-        }
-        case 5:
-        {
-            DrawFigure(event->pos(),event->pos());
-            break;
-        }
-        case 8:
+        case 101: case 102: case 201:
         {
             DrawFigure(event->pos(),event->pos());
             break;
         }
         }
     }
-
     }
     update();
     event->accept();
@@ -134,7 +124,7 @@ void PaintWidget::mouseReleaseEvent(QMouseEvent *event)
     {
         switch (ActiveTool)
         {
-        case 1: case 2: case 3: case 6:
+        case 1: case 2: case 3: case 4:
         {
             DrawFigure(MP1,MP2);
             break;
@@ -167,6 +157,7 @@ void PaintWidget::paintEvent(QPaintEvent *event)
 
 void PaintWidget::DrawFigure(QPoint a, QPoint b)
 {
+    changed = true;
     QPainter pnt(&image);
     pnt.setPen(myPen);
     if (filling) pnt.setBrush(myBrush);
@@ -177,27 +168,23 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
         pnt.drawLine(a,b);
         break;
     }
-        case 4:
-    {
-        // QColor brClr;
-        // brClr=myPen.color();
-        // QBrush bb(brClr, Qt::SolidPattern);
-        // pnt.setBrush(bb);
-        // pnt.drawEllipse(b,(int)myPen.widthF(),(int)myPen.widthF());
-        pnt.drawLine(a,b);
-        break;
-    }
     case 2:
     {
-        pnt.drawEllipse(QRectF(a.x(),a.y(),b.x(),b.y()));
+        pnt.drawRect(QRect(a, b));
         break;
     }
     case 3:
     {
-        pnt.drawRoundedRect(QRectF(a.x(),a.y(),b.x(),b.y()),20,20);
+        pnt.drawLine(a,b);
+//        pnt.drawRoundedRect(QRectF(a.x(),a.y(),b.x(),b.y()),20,20);
         break;
     }
-    case 5:
+    case 4:
+    {
+        pnt.drawEllipse(QRect(a, b));
+        break;
+    }
+    case 101:
     {
         QPen whitePen(Qt::white);
         whitePen.setWidth(myPen.widthF());
@@ -210,16 +197,7 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
         else pnt.drawLine(a,b);
         break;
     }
-    case 6:
-    {
-        pnt.drawRect(QRectF(a.x(),a.y(),b.x(),b.y()));
-        break;
-    }
-    case 7: // fill
-    {
-        break;
-    }
-    case 8: // spray
+    case 102: // spray
     {
         bool sign=false;
         QPen sprayPen;
@@ -227,28 +205,32 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
         sprayPen.setWidth(1);
         pnt.setPen(sprayPen);
 
-              for(int i=1; i<=BrushRadius;i++)
-              {
-                  int randomx, randomy;
-                  randomx=rand() % BrushRadius*2 ;
-                  randomy=rand() % BrushRadius*2 ;
-if (randomx*randomx+randomy*randomy<=BrushRadius*BrushRadius*4)
-{
-                  if (sign==false)
-                  {
-                      pnt.drawPoint(b.x()+randomx,b.y()+randomy);
-                      pnt.drawPoint(b.x()+randomx,b.y()-randomy);
-                      sign=true;
-                  }
-                  else
-                  {
-                      pnt.drawPoint(b.x()-randomx,b.y()-randomy);
-                      pnt.drawPoint(b.x()-randomx,b.y()+randomy);
-                      sign=false;
-                  }
-}
+        for(int i=1; i<=BrushRadius;i++)
+        {
+            int randomx, randomy;
+            randomx=rand() % BrushRadius*2 ;
+            randomy=rand() % BrushRadius*2 ;
+            if (randomx*randomx+randomy*randomy<=BrushRadius*BrushRadius*4)
+            {
+                              if (sign==false)
+                              {
+                                  pnt.drawPoint(b.x()+randomx,b.y()+randomy);
+                                  pnt.drawPoint(b.x()+randomx,b.y()-randomy);
+                                  sign=true;
+                              }
+                              else
+                              {
+                                  pnt.drawPoint(b.x()-randomx,b.y()-randomy);
+                                  pnt.drawPoint(b.x()-randomx,b.y()+randomy);
+                                  sign=false;
+                              }
+            }
 
-              }
+        }
+        break;
+    }
+    case 201: // fill
+    {
         break;
     }
     }
@@ -259,6 +241,7 @@ if (randomx*randomx+randomy*randomy<=BrushRadius*BrushRadius*4)
 
 void PaintWidget::Fill(QColor oldClr, QColor newClr, QPoint p)
 {
+    changed = true;
     QPainter pnt(&image);
     pnt.setPen(QPen(newClr));
 
@@ -289,6 +272,7 @@ void PaintWidget::Fill(QColor oldClr, QColor newClr, QPoint p)
 
 void PaintWidget::Fill2(QRgb oldColor, QRgb newColor, int x, int y)
 {
+    changed = true;
     if (oldColor == newColor) return;
 
             QStack<QPoint> stk;

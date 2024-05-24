@@ -17,15 +17,15 @@ BBproject::BBproject(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::BBproject)
 {
-    this->setWindowTitle("Blue Lines");
+    this->setWindowTitle("Blue Lines - Безымянный");
     this->setWindowIcon(QIcon(":/icons/mars-double.png"));
     this->setPalette(light_palette);
     ui->setupUi(this);
     er_size = default_eraser_size;
     br_thickness = default_brush_thickness;
     fill_shape = false;
-    paintwid = new PaintWidget(parent);
-    ui->scrollArea->setWidget(paintwid);
+    paintwid = new PaintWidget;
+    ui->verticalLayout_2->addWidget(paintwid);
     ui->eraser_size->setText(QString::number(er_size));
     ui->brush_thickness->setText(QString::number(br_thickness));
     connect(ui->shape_fill, SIGNAL(stateChanged(int)), SLOT(fill_switched()));
@@ -47,18 +47,18 @@ BBproject::~BBproject()
 }
 
 void BBproject::uncheck_buttons(QLayout *container){
-    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>(Qt::FindDirectChildrenOnly);
+    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>(QString(), Qt::FindDirectChildrenOnly);
     for(auto unit : list) {unit->setChecked(false); unit->setCheckable(false);}
 }
 
 int BBproject::get_checked_button(QLayout *container){
-    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>(Qt::FindDirectChildrenOnly);
+    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>(QString(), Qt::FindDirectChildrenOnly);
     for(auto unit : list) {if(unit->isChecked()) return list.indexOf(unit);}
     return -1;
 }
 
 void BBproject::connect_buttons(QLayout *container, const char* slot){
-    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>(Qt::FindDirectChildrenOnly);
+    QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>(QString(), Qt::FindDirectChildrenOnly);
     for(auto unit : list) connect(unit, SIGNAL(clicked()), slot);
 }
 
@@ -161,7 +161,7 @@ void BBproject::clicked_tool(){
             break;
         case 1:
             std::cout<<"switching to eraser tool\n";
-            paintwid->setActiveTool(5);
+            paintwid->setActiveTool(0);
             pen.setWidth(er_size);
             paintwid->setPenWidth(er_size);
             break;
@@ -182,7 +182,7 @@ void BBproject::clicked_tool(){
                 paintwid->setActiveTool(3);
                 break;
             case 4:
-                paintwid->setActiveTool(6);
+                paintwid->setActiveTool(4);
                 break;
             default:
                 paintwid->setActiveTool(-1);
@@ -197,10 +197,10 @@ void BBproject::clicked_tool(){
             id = get_checked_button(ui->brush_modes);
             switch (id) {
             case 0:
-                paintwid->setActiveTool(4);
+                paintwid->setActiveTool(101);
                 break;
             case 1:
-                paintwid->setActiveTool(8);
+                paintwid->setActiveTool(102);
                 break;
             default:
                 paintwid->setActiveTool(-1);
@@ -210,7 +210,7 @@ void BBproject::clicked_tool(){
         case 4:
             std::cout<<"switching to fill tool\n";
             set_color(ui->fill_page->findChild<color_widgets::ColorWheel*>()->color(), 0);
-            paintwid->setActiveTool(7);
+            paintwid->setActiveTool(201);
             break;
         case 5:
             std::cout<<"switching to effects tool\n";
@@ -255,6 +255,8 @@ void BBproject::clicked_shape_mode(){
         case 0:
             paintwid->setActiveTool(1);
             break;
+//        case 1: star
+//            break;
         case 2:
             paintwid->setActiveTool(2);
             break;
@@ -262,7 +264,7 @@ void BBproject::clicked_shape_mode(){
             paintwid->setActiveTool(3);
             break;
         case 4:
-            paintwid->setActiveTool(6);
+            paintwid->setActiveTool(4);
             break;
         default:
             paintwid->setActiveTool(-1);
@@ -280,10 +282,10 @@ void BBproject::clicked_brush_mode(){
         //write here to switch brush
         switch (ui->brush_modes->indexOf(b)) {
         case 0:
-            paintwid->setActiveTool(4);
+            paintwid->setActiveTool(101);
             break;
         case 1:
-            paintwid->setActiveTool(8);
+            paintwid->setActiveTool(102);
             break;
         default:
             paintwid->setActiveTool(-1);
@@ -341,7 +343,7 @@ void BBproject::fill_switched(){
 
 void BBproject::on_open_triggered()
 {
-    if (!path->isNull()){
+    if (paintwid->changed){
         QMessageBox* saveMessage = new QMessageBox(QMessageBox::Question,
                                                    tr("Внимание"),
                                                    tr("Сохранить изменения в открытом файле?"),
@@ -358,7 +360,10 @@ void BBproject::on_open_triggered()
                                         tr("Открыть файл"),
                                         tr("/home"),
                                         tr(supported_formats));
-    paintwid->setImage(QImage(*path));
+    if (!path->isNull()){
+        paintwid->setImage(QImage(*path));
+        this->setWindowTitle("Blue Lines - " + *path);
+    }
 }
 
 void BBproject::on_save_triggered()
@@ -368,6 +373,7 @@ void BBproject::on_save_triggered()
         return;
     }
     paintwid->getImage().save(*path);
+    paintwid->changed = false;
 }
 
 
@@ -378,12 +384,13 @@ void BBproject::on_save_as_triggered()
                                          *path,
                                          tr(supported_formats));
     paintwid->getImage().save(*path);
+    paintwid->changed = false;
 }
 
 
 void BBproject::on_close_triggered()
 {
-    if (!path->isNull()){
+    if (paintwid->changed){
         QMessageBox* saveMessage = new QMessageBox(QMessageBox::Question,
                                                    tr("Внимание"),
                                                    tr("Сохранить изменения перед закрытием?"),
@@ -454,7 +461,7 @@ void BBproject::on_dark_triggered()
 
 void BBproject::closeEvent(QCloseEvent *event)
 {
-    if (!path->isNull()){
+    if (paintwid->changed){
         QMessageBox* saveMessage = new QMessageBox(QMessageBox::Question,
                                                    tr("Внимание"),
                                                    tr("Сохранить изменения перед выходом?"),

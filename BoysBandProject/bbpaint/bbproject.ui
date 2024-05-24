@@ -6,42 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
-    <height>667</height>
+    <width>1254</width>
+    <height>732</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Blue Lines</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="image_label">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>-200</x>
-      <y>-90</y>
-      <width>1200</width>
-      <height>675</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>IBeamCursor</cursorShape>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Plain</enum>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-    </property>
-    <property name="textInteractionFlags">
-     <set>Qt::LinksAccessibleByKeyboard</set>
-    </property>
-   </widget>
+  <layout class="QHBoxLayout" name="horizontalLayout_100">
+    <item>
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
@@ -52,10 +32,13 @@
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetNoConstraint</enum>
+     </property>
      <item>
       <layout class="QHBoxLayout" name="buttons">
        <property name="sizeConstraint">
-        <enum>QLayout::SetMaximumSize</enum>
+        <enum>QLayout::SetNoConstraint</enum>
        </property>
        <property name="leftMargin">
         <number>5</number>
@@ -347,6 +330,9 @@
        <property name="spacing">
         <number>0</number>
        </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetNoConstraint</enum>
+       </property>
        <item>
         <widget class="QStackedWidget" name="tool_stack">
          <property name="sizePolicy">
@@ -365,7 +351,7 @@
           <bool>true</bool>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="mouse_page">
           <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -1507,34 +1493,45 @@
         </widget>
        </item>
        <item>
-        <widget class="QScrollArea" name="scrollArea">
-         <property name="widgetResizable">
-          <bool>true</bool>
+       <widget class="QScrollArea" name="scrollArea">
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>764</width>
+           <height>637</height>
+          </rect>
          </property>
-         <widget class="QWidget" name="scrollAreaWidgetContents">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>945</width>
-            <height>598</height>
-           </rect>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetDefaultConstraint</enum>
+            </property>
+           </layout>
+          </item>
+         </layout>
         </widget>
-       </item>
+       </widget>
+      </item>
       </layout>
      </item>
     </layout>
    </widget>
+   </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1280</width>
-     <height>24</height>
+     <width>1254</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="view">
@@ -1563,11 +1560,6 @@
    <addaction name="view"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action">
-   <property name="text">
-    <string>ашгмркм</string>
-   </property>
-  </action>
   <action name="save">
    <property name="text">
     <string>Сохранить</string>
