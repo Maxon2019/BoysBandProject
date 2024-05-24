@@ -38,5 +38,21 @@
         <file>effects-white.png</file>
         <file>effects.png</file>
         <file>shapes.png</file>
+        <file>spray-white.png</file>
+        <file>spray.png</file>
+        <file>rounded-rectangle-white.png</file>
+        <file>rounded-rectangle.png</file>
+        <file>pencil-white.png</file>
+        <file>pencil.png</file>
+        <file>highlighter-white.png</file>
+        <file>highlighter.png</file>
+        <file>curved-white.png</file>
+        <file>curved.png</file>
+        <file>chalk-white.png</file>
+        <file>chalk.png</file>
+        <file>brush-2-white.png</file>
+        <file>brush-2.png</file>
+        <file>brush-1-white.png</file>
+        <file>brush-1.png</file>
     </qresource>
 </RCC>

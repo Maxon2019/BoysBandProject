@@ -84,7 +84,7 @@ void PaintWidget::mousePressEvent(QMouseEvent *event)
         MP1=event->pos();
         isDrawing=true;
         //MP2=MP1;
-        if (ActiveTool==7)
+        if (ActiveTool==201)
         {
             QColor oldClr, newClr;
             oldClr=image.pixel(MP1);
