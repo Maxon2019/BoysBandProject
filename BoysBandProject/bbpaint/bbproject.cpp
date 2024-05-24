@@ -89,10 +89,7 @@ void BBproject::connect_colors(){
 }
 
 void BBproject::set_color(QColor color, int index){
-    pen.setColor(color);
-    brush.setColor(color);
-    paintwid->setPen(pen);
-    paintwid->setBrush(brush);
+    paintwid->setColor(color);
 }
 
 void BBproject::color_switched(){
@@ -161,14 +158,12 @@ void BBproject::clicked_tool(){
             break;
         case 1:
             std::cout<<"switching to eraser tool\n";
-            paintwid->setActiveTool(0);
-            pen.setWidth(er_size);
+            paintwid->setActiveTool(101);
             paintwid->setPenWidth(er_size);
             break;
         case 2:
             std::cout<<"switching to shapes tool\n";
             set_color(ui->eraser_page->findChild<color_widgets::ColorWheel*>()->color(), 0);
-            pen.setWidth(3);
             paintwid->setPenWidth(3);
             id = get_checked_button(ui->shape_modes);
             switch (id) {
@@ -192,15 +187,20 @@ void BBproject::clicked_tool(){
         case 3:
             std::cout<<"switching to brush tool\n";
             set_color(ui->brush_page->findChild<color_widgets::ColorWheel*>()->color(), 0);
-            pen.setWidth(br_thickness);
             paintwid->setPenWidth(br_thickness);
             id = get_checked_button(ui->brush_modes);
             switch (id) {
             case 0:
-                paintwid->setActiveTool(101);
+                paintwid->setActiveTool(103);
                 break;
             case 1:
                 paintwid->setActiveTool(102);
+                break;
+            case 2:
+                paintwid->setActiveTool(103);
+                break;
+            case 3:
+                paintwid->setActiveTool(103);
                 break;
             default:
                 paintwid->setActiveTool(-1);
@@ -282,10 +282,19 @@ void BBproject::clicked_brush_mode(){
         //write here to switch brush
         switch (ui->brush_modes->indexOf(b)) {
         case 0:
-            paintwid->setActiveTool(101);
+            paintwid->setActiveTool(103);
+            paintwid->pen_type = 0;
             break;
         case 1:
             paintwid->setActiveTool(102);
+            break;
+        case 2:
+            paintwid->setActiveTool(103);
+            paintwid->pen_type = 1;
+            break;
+        case 3:
+            paintwid->setActiveTool(103);
+            paintwid->pen_type = 2;
             break;
         default:
             paintwid->setActiveTool(-1);
@@ -317,7 +326,6 @@ void BBproject::eraser_edited(){
     if(ok) er_size = res;
     else line->setText(QString::number(er_size));
     std::cout<<"new size is "<<er_size<<"\n";
-    pen.setWidth(er_size);
     paintwid->setPenWidth(er_size);
 }
 
@@ -328,7 +336,6 @@ void BBproject::brush_edited(){
     if(ok) br_thickness = res;
     else line->setText(QString::number(br_thickness));
     std::cout<<"new thickness is "<<br_thickness<<"\n";
-    pen.setWidth(br_thickness);
     paintwid->setPenWidth(br_thickness);
     //write here to add functionality
 }

@@ -10,6 +10,7 @@ PaintWidget::PaintWidget(QWidget *parent) : QWidget(parent)
     filling = false;
     circle_style = false;
     changed = false;
+    pen_type = 0;
     //BrushShape=bshEllipse;
 
     myPen=QPen(Qt::black,1,Qt::SolidLine);
@@ -68,6 +69,13 @@ void PaintWidget::setPenWidth(int width)
     update();
 }
 
+void PaintWidget::setColor(QColor color)
+{
+    myPen.setColor(color);
+    myBrush.setColor(color);
+    update();
+}
+
 void PaintWidget::mousePressEvent(QMouseEvent *event)
 {
     if ( event->button() == Qt::LeftButton )
@@ -102,7 +110,7 @@ void PaintWidget::mouseMoveEvent(QMouseEvent *event)
     {
         switch (ActiveTool)
         {
-        case 101: case 102: case 201:
+        case 101: case 102: case 201: case 103:
         {
             DrawFigure(event->pos(),event->pos());
             break;
@@ -176,7 +184,6 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
     case 3:
     {
         pnt.drawLine(a,b);
-//        pnt.drawRoundedRect(QRectF(a.x(),a.y(),b.x(),b.y()),20,20);
         break;
     }
     case 4:
@@ -204,30 +211,64 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
         sprayPen.setColor(pnt.pen().color());
         sprayPen.setWidth(1);
         pnt.setPen(sprayPen);
-
         for(int i=1; i<=BrushRadius;i++)
         {
             int randomx, randomy;
-            randomx=rand() % BrushRadius*2 ;
-            randomy=rand() % BrushRadius*2 ;
-            if (randomx*randomx+randomy*randomy<=BrushRadius*BrushRadius*4)
+            randomx=rand() % BrushRadius/2 ;
+            randomy=rand() % BrushRadius/2 ;
+            if (randomx*randomx+randomy*randomy<=BrushRadius*BrushRadius/4)
             {
-                              if (sign==false)
-                              {
-                                  pnt.drawPoint(b.x()+randomx,b.y()+randomy);
-                                  pnt.drawPoint(b.x()+randomx,b.y()-randomy);
-                                  sign=true;
-                              }
-                              else
-                              {
-                                  pnt.drawPoint(b.x()-randomx,b.y()-randomy);
-                                  pnt.drawPoint(b.x()-randomx,b.y()+randomy);
-                                  sign=false;
-                              }
+                if (sign==false)
+                {
+                    pnt.drawPoint(b.x()+randomx,b.y()+randomy);
+                    pnt.drawPoint(b.x()+randomx,b.y()-randomy);
+                    sign=true;
+                }
+                else
+                {
+                    pnt.drawPoint(b.x()-randomx,b.y()-randomy);
+                    pnt.drawPoint(b.x()-randomx,b.y()+randomy);
+                    sign=false;
+                }
             }
-
-        }
         break;
+        }
+    }
+    case 103:{
+        switch(pen_type){
+        case 0:{
+            pnt.drawLine(a,b);
+            break;
+        }
+        case 1:{
+            QColor brcolor;
+            brcolor = myPen.color();
+            QBrush bb(brcolor, Qt::SolidPattern);
+            pnt.setBrush(bb);
+            pnt.drawEllipse(b,(int)myPen.widthF(),(int)myPen.widthF());
+            break;
+        }
+        case 2:{
+            QPen tpen(Qt::NoPen);
+            pnt.setPen(tpen);
+            pnt.setBrush(myBrush);
+            pnt.drawEllipse(b,(int)myPen.widthF(),(int)myPen.widthF());
+            break;
+        }
+        case 3:{
+            QPen mPen;
+            mPen.setColor(myPen.color());
+            mPen.setWidth(1);
+            pnt.setPen(mPen);
+            for(int i=-myPen.width()/2; i<=myPen.width()/2;i++){
+                for(int j=-myPen.width()/2; j<=myPen.width()/2;j++){
+
+                    pnt.drawPoint(i, j);
+                }
+            }
+            break;
+        }
+        }
     }
     case 201: // fill
     {

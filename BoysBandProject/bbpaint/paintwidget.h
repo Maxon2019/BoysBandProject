@@ -20,6 +20,7 @@ public:
     int BrushSize;
     int PenSize;
     bool filling, circle_style, changed;
+    int pen_type;
 
     void setImage(QImage newImage);
     QImage getImage();
@@ -31,6 +32,7 @@ public slots:
     void setBrush(QBrush changeBrush);
     void setPen(QPen changePen);
     void setPenWidth(int width);
+    void setColor(QColor color);
 
 
 protected:

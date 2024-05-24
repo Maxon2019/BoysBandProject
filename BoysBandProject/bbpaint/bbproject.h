@@ -69,8 +69,6 @@ private:
     QString *path;
     int er_size, br_thickness;
     bool fill_shape;
-    QPen pen;
-    QBrush brush;
     PaintWidget *paintwid;
 };
 #endif // BBPROJECT_H
