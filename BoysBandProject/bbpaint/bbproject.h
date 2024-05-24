@@ -31,6 +31,12 @@ public:
     void addListItem(QHBoxLayout** list, int &count);
     void connect_colors();
     void set_color(QColor color, int index);
+    void drawBtnIcons();
+    QPixmap pixForBrush(QBrush brush);
+    QPixmap pixForPen(QPen pen);
+    void uncheck_buttons_l(QLayout *container);
+    void connect_buttons_l(QLayout *container, const char* slot);
+    int get_checked_button_l(QLayout *container);
 
 private slots:
     void on_open_triggered();
@@ -46,7 +52,8 @@ private slots:
     void clicked_eraser_mode();
     void clicked_shape_mode();
     void clicked_brush_mode();
-    void clicked_effect_mode();
+    void clicked_fill_effect_mode();
+    void clicked_outline_effect_mode();
 
     void eraser_edited();
     void brush_edited();

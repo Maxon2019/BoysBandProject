@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1254</width>
-    <height>746</height>
+    <height>763</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -342,7 +342,7 @@
            <bool>true</bool>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="mouse_page">
            <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -1370,10 +1370,10 @@
               <x>20</x>
               <y>20</y>
               <width>270</width>
-              <height>120</height>
+              <height>480</height>
              </rect>
             </property>
-            <layout class="QVBoxLayout" name="effects_layout" stretch="1,1,5">
+            <layout class="QVBoxLayout" name="effects_layout" stretch="1,0,2,1,0,2">
              <property name="spacing">
               <number>5</number>
              </property>
@@ -1383,7 +1383,7 @@
              <item>
               <widget class="QLabel" name="label_21">
                <property name="text">
-                <string>Эффекты:</string>
+                <string>Эффект заливки:</string>
                </property>
               </widget>
              </item>
@@ -1395,11 +1395,20 @@
               </widget>
              </item>
              <item>
-              <layout class="QGridLayout" name="effect_modes">
-               <item row="0" column="0">
-                <widget class="QToolButton" name="effect1">
+              <layout class="QVBoxLayout" name="fill_effects">
+               <property name="spacing">
+                <number>-1</number>
+               </property>
+               <item>
+                <widget class="QToolButton" name="f_e_1">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>...</string>
+                  <string/>
                  </property>
                  <property name="checkable">
                   <bool>true</bool>
@@ -1409,80 +1418,163 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="2">
-                <widget class="QToolButton" name="effect3">
+               <item>
+                <widget class="QToolButton" name="f_e_3">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>...</string>
+                  <string/>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="4">
-                <widget class="QToolButton" name="effect5">
+               <item>
+                <widget class="QToolButton" name="f_e_4">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>...</string>
+                  <string/>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QToolButton" name="effect2">
+               <item>
+                <widget class="QToolButton" name="f_e_5">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>...</string>
+                  <string/>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="3">
-                <widget class="QToolButton" name="effect4">
+               <item>
+                <widget class="QToolButton" name="f_e_6">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>...</string>
+                  <string/>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QToolButton" name="effect7">
+               <item>
+                <widget class="QToolButton" name="f_e_7">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>...</string>
+                  <string/>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
-                <widget class="QToolButton" name="effect12">
+              </layout>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Эффект обводки:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_9">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="outline_effects">
+               <item>
+                <widget class="QToolButton" name="o_e_4">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>...</string>
+                  <string/>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QToolButton" name="effect11">
+               <item>
+                <widget class="QToolButton" name="o_e_5">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>...</string>
+                  <string/>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0">
-                <widget class="QToolButton" name="effect6">
+               <item>
+                <widget class="QToolButton" name="o_e_3">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>...</string>
+                  <string/>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
-                <widget class="QToolButton" name="effect8">
+               <item>
+                <widget class="QToolButton" name="o_e_2">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>...</string>
+                  <string/>
+                 </property>
+                 <property name="checkable">
+                  <bool>false</bool>
+                 </property>
+                 <property name="checked">
+                  <bool>false</bool>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="3">
-                <widget class="QToolButton" name="effect9">
-                 <property name="text">
-                  <string>...</string>
+               <item>
+                <widget class="QToolButton" name="o_e_1">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
                  </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QToolButton" name="effect10">
                  <property name="text">
-                  <string>...</string>
+                  <string/>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -1518,7 +1610,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>930</width>
+             <width>924</width>
              <height>598</height>
             </rect>
            </property>
@@ -1546,7 +1638,7 @@
      <x>0</x>
      <y>0</y>
      <width>1254</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="view">

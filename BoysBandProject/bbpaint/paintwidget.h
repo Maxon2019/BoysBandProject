@@ -33,6 +33,8 @@ public slots:
     void setPen(QPen changePen);
     void setPenWidth(int width);
     void setColor(QColor color);
+    void setPenStyle(Qt::PenStyle style);
+    void setBrushStyle(Qt::BrushStyle style);
 
 
 protected:

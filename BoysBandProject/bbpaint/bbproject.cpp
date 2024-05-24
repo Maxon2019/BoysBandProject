@@ -35,9 +35,11 @@ BBproject::BBproject(QWidget *parent)
     connect_buttons(ui->eraser_modes, SLOT(clicked_eraser_mode()));
     connect_buttons(ui->shape_modes, SLOT(clicked_shape_mode()));
     connect_buttons(ui->brush_modes, SLOT(clicked_brush_mode()));
-    connect_buttons(ui->effect_modes, SLOT(clicked_effect_mode()));
+    connect_buttons_l(ui->fill_effects, SLOT(clicked_fill_effect_mode()));
+    connect_buttons_l(ui->outline_effects, SLOT(clicked_outline_effect_mode()));
     path = new QString;
     connect_colors();
+    drawBtnIcons();
 }
 
 BBproject::~BBproject()
@@ -60,6 +62,29 @@ int BBproject::get_checked_button(QLayout *container){
 void BBproject::connect_buttons(QLayout *container, const char* slot){
     QList <QToolButton*> list = container->parentWidget()->findChildren<QToolButton*>(QString(), Qt::FindDirectChildrenOnly);
     for(auto unit : list) connect(unit, SIGNAL(clicked()), slot);
+}
+
+void BBproject::uncheck_buttons_l(QLayout *container){
+    for(int i = 0; i<container->count(); i++){
+        auto unit = qobject_cast<QToolButton*>(container->itemAt(i)->widget());
+        unit->setChecked(false);
+        unit->setCheckable(false);
+    }
+}
+
+int BBproject::get_checked_button_l(QLayout *container){
+    for(int i = 0; i<container->count(); i++){
+        auto unit = qobject_cast<QToolButton*>(container->itemAt(i)->widget());
+        if(unit->isChecked()) return i;
+    }
+    return -1;
+}
+
+void BBproject::connect_buttons_l(QLayout *container, const char* slot){
+    for(int i = 0; i<container->count(); i++){
+        auto unit = qobject_cast<QToolButton*>(container->itemAt(i)->widget());
+        connect(unit, SIGNAL(clicked()), slot);
+    }
 }
 
 void BBproject::connect_colors(){
@@ -208,6 +233,9 @@ void BBproject::clicked_tool(){
             case 3:
                 paintwid->setActiveTool(103);
                 break;
+            case 4:
+                paintwid->setActiveTool(103);
+                break;
             default:
                 paintwid->setActiveTool(-1);
                 break;
@@ -299,6 +327,7 @@ void BBproject::clicked_brush_mode(){
             break;
         case 1:
             paintwid->setActiveTool(102);
+            paintwid->pen_type = -1;
             break;
         case 2:
             paintwid->setActiveTool(103);
@@ -308,6 +337,10 @@ void BBproject::clicked_brush_mode(){
             paintwid->setActiveTool(103);
             paintwid->pen_type = 2;
             break;
+        case 4:
+            paintwid->setActiveTool(103);
+            paintwid->pen_type = 3;
+            break;
         default:
             paintwid->setActiveTool(-1);
             break;
@@ -316,15 +349,57 @@ void BBproject::clicked_brush_mode(){
     b->setChecked(true);
 }
 
-void BBproject::clicked_effect_mode(){
+void BBproject::clicked_fill_effect_mode(){
     QToolButton *b = qobject_cast<QToolButton*>(sender());
     if(!b->isCheckable()){
-        uncheck_buttons(ui->effect_modes);
+        uncheck_buttons_l(ui->fill_effects);
         b->setCheckable(true);
         //write here to switch effect
-        switch (ui->effect_modes->indexOf(b)) {
-        default:
-            std::cout<<"effect mode selected\n";
+        switch (ui->fill_effects->indexOf(b)) {
+        case 0:
+            paintwid->setBrushStyle(Qt::SolidPattern);
+            break;
+        case 1:
+            paintwid->setBrushStyle(Qt::Dense5Pattern);
+            break;
+        case 2:
+            paintwid->setBrushStyle(Qt::HorPattern);
+            break;
+        case 3:
+            paintwid->setBrushStyle(Qt::VerPattern);
+            break;
+        case 4:
+            paintwid->setBrushStyle(Qt::CrossPattern);
+            break;
+        case 5:
+            paintwid->setBrushStyle(Qt::DiagCrossPattern);
+            break;
+        }
+    }
+    b->setChecked(true);
+}
+
+void BBproject::clicked_outline_effect_mode(){
+    QToolButton *b = qobject_cast<QToolButton*>(sender());
+    if(!b->isCheckable()){
+        uncheck_buttons_l(ui->outline_effects);
+        b->setCheckable(true);
+        //write here to switch effect
+        switch (ui->outline_effects->indexOf(b)) {
+        case 0:
+            paintwid->setPenStyle(Qt::DashDotDotLine);
+            break;
+        case 1:
+            paintwid->setPenStyle(Qt::DotLine);
+            break;
+        case 2:
+            paintwid->setPenStyle(Qt::DashDotLine);
+            break;
+        case 3:
+            paintwid->setPenStyle(Qt::DashLine);
+            break;
+        case 4:
+            paintwid->setPenStyle(Qt::SolidLine);
             break;
         }
     }
@@ -506,4 +581,71 @@ void BBproject::closeEvent(QCloseEvent *event)
         }
         event->accept();
     }
+}
+
+void BBproject::drawBtnIcons()
+{
+    ui->f_e_1->setIcon(pixForBrush(QBrush(Qt::SolidPattern)));
+    ui->f_e_3->setIcon(pixForBrush(QBrush(Qt::Dense5Pattern)));
+    ui->f_e_4->setIcon(pixForBrush(QBrush(Qt::HorPattern)));
+    ui->f_e_5->setIcon(pixForBrush(QBrush(Qt::VerPattern)));
+    ui->f_e_6->setIcon(pixForBrush(QBrush(Qt::CrossPattern)));
+    ui->f_e_7->setIcon(pixForBrush(QBrush(Qt::DiagCrossPattern)));
+    QSize e_but_size = ui->f_e_1->geometry().size();
+    ui->f_e_1->setIconSize(e_but_size);
+    ui->f_e_3->setIconSize(e_but_size);
+    ui->f_e_4->setIconSize(e_but_size);
+    ui->f_e_5->setIconSize(e_but_size);
+    ui->f_e_6->setIconSize(e_but_size);
+    ui->f_e_7->setIconSize(e_but_size);
+
+    ui->o_e_1->setIcon(pixForPen(QPen(Qt::SolidLine)));
+    ui->o_e_2->setIcon(pixForPen(QPen(Qt::DashLine)));
+    ui->o_e_3->setIcon(pixForPen(QPen(Qt::DashDotLine)));
+    ui->o_e_4->setIcon(pixForPen(QPen(Qt::DashDotDotLine)));
+    ui->o_e_5->setIcon(pixForPen(QPen(Qt::DotLine)));
+    QSize o_but_size = ui->o_e_1->geometry().size();
+    ui->o_e_1->setIconSize(o_but_size);
+    ui->o_e_2->setIconSize(o_but_size);
+    ui->o_e_3->setIconSize(o_but_size);
+    ui->o_e_4->setIconSize(o_but_size);
+    ui->o_e_5->setIconSize(o_but_size);
+}
+
+QPixmap BBproject::pixForBrush(QBrush brush)
+{
+    int x,y;
+    x = ui->f_e_1->geometry().width();
+    y=ui->f_e_1->geometry().height();
+    QPixmap pixmap(x,y);
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    QPixmap image;
+    QRect target(0, 0, x, y);
+    QRect source(0, 0, x, y);
+    painter.setBrush(brush);
+    painter.fillRect(QRect(5, 2, x-10, y-5), brush);
+    painter.drawPixmap(target, image, source);
+
+    return pixmap;
+}
+
+QPixmap BBproject::pixForPen(QPen pen)
+{
+    int x,y;
+    x=185;
+    y=28;
+    QPixmap pixmap(x, y);
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    QPixmap image;
+    QRect target(0, 0, x, y);
+    QRect source(0, 0, x, y);
+    pen.setColor(Qt::black);
+    pen.setWidth(3);
+    painter.setPen(pen);
+    painter.drawLine(QPointF(5,y/2),QPointF(x-5,y/2));
+    painter.drawPixmap(target, image, source);
+
+    return pixmap;
 }
