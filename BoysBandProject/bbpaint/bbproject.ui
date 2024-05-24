@@ -609,25 +609,25 @@
              <item>
               <layout class="QGridLayout" name="shape_modes">
                <item row="0" column="1">
-                <widget class="QToolButton" name="shape_spline">
+                <widget class="QToolButton" name="shape_arrow">
                  <property name="text">
                   <string/>
                  </property>
                  <property name="icon">
                   <iconset>
-                   <normalon>:/icons/spline.png</normalon>
+                   <normalon>:/icons/arrow-white.png</normalon>
                   </iconset>
                  </property>
                 </widget>
                </item>
                <item row="1" column="1">
-                <widget class="QToolButton" name="shape_circle">
+                <widget class="QToolButton" name="shape_5star">
                  <property name="text">
-                  <string>...</string>
+                  <string/>
                  </property>
                  <property name="icon">
                   <iconset>
-                   <normalon>:/icons/circle.png</normalon>
+                   <normalon>:/icons/star.png</normalon>
                   </iconset>
                  </property>
                 </widget>
@@ -663,13 +663,13 @@
                 </widget>
                </item>
                <item row="0" column="2">
-                <widget class="QToolButton" name="shape_curved">
+                <widget class="QToolButton" name="shape_circle">
                  <property name="text">
                   <string>...</string>
                  </property>
                  <property name="icon">
                   <iconset>
-                   <normalon>:/icons/curved.png</normalon>
+                   <normalon>:/icons/circle.png</normalon>
                   </iconset>
                  </property>
                 </widget>
@@ -713,16 +713,26 @@
                 </widget>
                </item>
                <item row="1" column="2">
-                <widget class="QToolButton" name="shape8">
+                <widget class="QToolButton" name="shape_6star">
                  <property name="text">
-                  <string>...</string>
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normalon>:/icons/6star.png</normalon>
+                  </iconset>
                  </property>
                 </widget>
                </item>
                <item row="1" column="3">
-                <widget class="QToolButton" name="shape9">
+                <widget class="QToolButton" name="shape_mars">
                  <property name="text">
                   <string>...</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normalon>:/icons/mars-white.png</normalon>
+                  </iconset>
                  </property>
                 </widget>
                </item>

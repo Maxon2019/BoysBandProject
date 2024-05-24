@@ -519,17 +519,19 @@ void BBproject::on_light_triggered()
     ui->eraser_circle->setIcon(QIcon(":/icons/circle.png"));
     ui->eraser_square->setIcon(QIcon(":/icons/square.png"));
     ui->shape_line->setIcon(QIcon(":/icons/line.png"));
-    ui->shape_spline->setIcon(QIcon(":/icons/spline.png"));
+    ui->shape_arrow->setIcon(QIcon(":/icons/arrow-white.png"));
     ui->shape_circle->setIcon(QIcon(":/icons/circle.png"));
     ui->shape_round_rect->setIcon(QIcon(":/icons/rounded-rectangle.png"));
     ui->shape_rectangle->setIcon(QIcon(":/icons/rectangle.png"));
     ui->shape_triangle->setIcon(QIcon(":/icons/triangle.png"));
-    ui->shape_curved->setIcon(QIcon(":/icons/curved.png"));
+    ui->shape_5star->setIcon(QIcon(":/icons/star.png"));
+    ui->shape_6star->setIcon(QIcon(":/icons/6star.png"));
     ui->pencil->setIcon(QIcon(":/icons/pencil.png"));
     ui->highlighter->setIcon(QIcon(":/icons/highlighter.png"));
     ui->chalk->setIcon(QIcon(":/icons/chalk.png"));
     ui->brush_1->setIcon(QIcon(":/icons/brush-1.png"));
     ui->brush_2->setIcon(QIcon(":/icons/brush-2.png"));
+    ui->shape_mars->setIcon(QIcon(":/icons/mars-white.png"));
 }
 
 
@@ -550,17 +552,19 @@ void BBproject::on_dark_triggered()
     ui->eraser_circle->setIcon(QIcon(":/icons/circle-white.png"));
     ui->eraser_square->setIcon(QIcon(":/icons/square-white.png"));
     ui->shape_line->setIcon(QIcon(":/icons/line-white.png"));
-    ui->shape_spline->setIcon(QIcon(":/icons/spline-white.png"));
+    ui->shape_arrow->setIcon(QIcon(":/icons/arrow.png"));
     ui->shape_circle->setIcon(QIcon(":/icons/circle-white.png"));
     ui->shape_round_rect->setIcon(QIcon(":/icons/rounded-rectangle-white.png"));
     ui->shape_rectangle->setIcon(QIcon(":/icons/rectangle-white.png"));
     ui->shape_triangle->setIcon(QIcon(":/icons/triangle-white.png"));
-    ui->shape_curved->setIcon(QIcon(":/icons/curved-white.png"));
+    ui->shape_5star->setIcon(QIcon(":/icons/star-white.png"));
+    ui->shape_6star->setIcon(QIcon(":/icons/6star-white.png"));
     ui->pencil->setIcon(QIcon(":/icons/pencil-white.png"));
     ui->highlighter->setIcon(QIcon(":/icons/highlighter-white.png"));
     ui->chalk->setIcon(QIcon(":/icons/chalk-white.png"));
     ui->brush_1->setIcon(QIcon(":/icons/brush-1-white.png"));
     ui->brush_2->setIcon(QIcon(":/icons/brush-2-white.png"));
+    ui->shape_mars->setIcon(QIcon(":/icons/mars.png"));
 }
 
 void BBproject::closeEvent(QCloseEvent *event)

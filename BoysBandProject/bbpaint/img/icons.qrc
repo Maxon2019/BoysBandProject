@@ -3,7 +3,6 @@
         <file>mars-double.png</file>
         <file>icons.qrc</file>
         <file>triangle.png</file>
-        <file>star.png</file>
         <file>square.png</file>
         <file>rotate-right.png</file>
         <file>rotate-left.png</file>
@@ -16,14 +15,11 @@
         <file>fill.png</file>
         <file>circle.png</file>
         <file>line.png</file>
-        <file>spline.png</file>
         <file>cursor.png</file>
         <file>cursor-white.png</file>
         <file>triangle-white.png</file>
         <file>text-white.png</file>
-        <file>star-white.png</file>
         <file>square-white.png</file>
-        <file>spline-white.png</file>
         <file>rotate-right-white.png</file>
         <file>rotate-left-white.png</file>
         <file>reflect-vertical-white.png</file>
@@ -46,13 +42,19 @@
         <file>pencil.png</file>
         <file>highlighter-white.png</file>
         <file>highlighter.png</file>
-        <file>curved-white.png</file>
-        <file>curved.png</file>
         <file>chalk-white.png</file>
         <file>chalk.png</file>
         <file>brush-2-white.png</file>
         <file>brush-2.png</file>
         <file>brush-1-white.png</file>
         <file>brush-1.png</file>
+        <file>mars-white.png</file>
+        <file>mars.png</file>
+        <file>arrow-white.png</file>
+        <file>arrow.png</file>
+        <file>6star-white.png</file>
+        <file>6star.png</file>
+        <file>star-white.png</file>
+        <file>star.png</file>
     </qresource>
 </RCC>
