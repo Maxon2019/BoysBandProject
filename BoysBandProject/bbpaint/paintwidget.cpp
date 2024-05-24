@@ -132,7 +132,7 @@ void PaintWidget::mouseReleaseEvent(QMouseEvent *event)
     {
         switch (ActiveTool)
         {
-        case 1: case 2: case 3: case 4:
+        case 1: case 2: case 3: case 4: case 5: case 7:
         {
             DrawFigure(MP1,MP2);
             break;
@@ -191,6 +191,18 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
         pnt.drawEllipse(QRect(a, b));
         break;
     }
+    case 5:
+        pnt.drawRoundedRect(QRect(a, b), 20, 20);
+        break;
+    case 7:
+    {
+        QPoint A{a.x(), b.y()}, B{(a.x()+b.x())/2, a.y()}, C{b};
+        QPolygon polygon;
+        polygon << A << B << C;
+        pnt.drawPolygon(polygon);
+        break;
+    }
+
     case 101:
     {
         QPen whitePen(Qt::white);

@@ -179,6 +179,12 @@ void BBproject::clicked_tool(){
             case 4:
                 paintwid->setActiveTool(4);
                 break;
+            case 5:
+                paintwid->setActiveTool(5);
+                break;
+            case 7:
+                paintwid->setActiveTool(7);
+                break;
             default:
                 paintwid->setActiveTool(-1);
                 break;
@@ -265,6 +271,12 @@ void BBproject::clicked_shape_mode(){
             break;
         case 4:
             paintwid->setActiveTool(4);
+            break;
+        case 5:
+            paintwid->setActiveTool(5);
+            break;
+        case 7:
+            paintwid->setActiveTool(7);
             break;
         default:
             paintwid->setActiveTool(-1);
