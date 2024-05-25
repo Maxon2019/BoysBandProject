@@ -58,6 +58,7 @@ private slots:
 
     void eraser_edited();
     void brush_edited();
+    void shape_edited();
 
     void fill_switched();
 
@@ -80,7 +81,7 @@ private:
     Ui::BBproject *ui;
     QPixmap *image;
     QString *path;
-    int er_size, br_thickness;
+    int er_size, br_thickness, sh_thickness;
     bool fill_shape;
     PaintWidget *paintwid;
 };

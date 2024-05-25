@@ -5,6 +5,9 @@
 #include <math.h>
 #include <iostream>
 
+const int max_width = 1280;
+const int max_height = 720;
+
 PaintWidget::PaintWidget(QWidget *parent) : QWidget(parent)
 {
     setAttribute(Qt::WA_StaticContents);
@@ -13,30 +16,30 @@ PaintWidget::PaintWidget(QWidget *parent) : QWidget(parent)
     circle_style = false;
     changed = false;
     pen_type = 0;
-    //BrushShape=bshEllipse;
 
     myPen=QPen(Qt::black,1,Qt::SolidLine);
     myBrush=QBrush(Qt::white, Qt::SolidPattern);
     BrushRadius=20;
 
-    image=QImage(1600 ,900 ,QImage::Format_ARGB32_Premultiplied) ;
+    image=QImage(max_width ,max_height ,QImage::Format_ARGB32_Premultiplied) ;
     image.fill(qRgb(255, 255, 255));
+    reset();
 }
 
-PaintWidget::~PaintWidget()
-{
+PaintWidget::~PaintWidget(){
 
 }
 
 void PaintWidget::setImage(QImage newImage)
 {
     image=newImage;
+    reset();
     update();
 }
 
 QImage PaintWidget::getImage()
 {
-    return image;
+    return original_image;
 }
 
 void PaintWidget::setActiveTool(int activeTool)
@@ -49,6 +52,7 @@ void PaintWidget::clearAll()
 {
     image=QImage(1600 ,900 ,QImage::Format_ARGB32_Premultiplied) ;
     image.fill(qRgb(255, 255, 255));
+    reset();
     update();
 }
 
@@ -67,7 +71,7 @@ void PaintWidget::setPen(QPen changePen)
 void PaintWidget::setPenWidth(int width)
 {
     myPen.setWidth(width);
-    BrushRadius=width*3;
+    BrushRadius=width;
     update();
 }
 
@@ -86,11 +90,47 @@ void PaintWidget::setBrushStyle(Qt::BrushStyle style){
     myBrush.setStyle(style);
 }
 
+void PaintWidget::rotate(int angle){
+    changed = true;
+    QTransform transform;
+    transform.rotate(angle);
+    QImage rotatedImage = original_image.transformed(transform);
+    original_image = rotatedImage;
+    original_size = original_image.size();
+    image = original_image.scaled(original_size*zoom_k);
+    update();
+}
+
+void PaintWidget::mirror(bool horizontal){
+    changed = true;
+    original_image.mirror(horizontal, !horizontal);
+    image = original_image.scaled(original_size*zoom_k);
+    update();
+}
+
+void PaintWidget::reset(){
+    zoom_k = 1;
+    original_size = image.size();
+    original_image = image;
+}
+
+void PaintWidget::performZoom(qreal k){
+    zoom_k *= k;
+    zoom_k = zoom_k>20 ? 20 : zoom_k;
+    zoom_k = zoom_k<0.1 ? 0.1 : zoom_k;
+    image = original_image.scaled(original_size*zoom_k);
+    update();
+}
+
+void PaintWidget::wheelEvent(QWheelEvent *event){
+    qreal angle = event->angleDelta().y()/120;
+    performZoom(std::pow(1.2, angle));
+}
+
 void PaintWidget::mousePressEvent(QMouseEvent *event)
 {
     if ( event->button() == Qt::LeftButton )
     {
-
         MP1=event->pos();
         isDrawing=true;
         //MP2=MP1;
@@ -102,31 +142,20 @@ void PaintWidget::mousePressEvent(QMouseEvent *event)
             //Fill(oldClr, newClr, MP2);
             Fill2(oldClr.rgb(), newClr.rgb(), MP1.x(), MP1.y());
             update();
-
         }
+    if(ActiveTool==101 || ActiveTool==102 || ActiveTool==103){
+        DrawFigure(event->pos(),event->pos());
+        update();
+    }
     }
 event->accept();
 }
 
-void PaintWidget::mouseMoveEvent(QMouseEvent *event)
-{
-    qreal X,Y;
-    X=event->pos().x();
-    Y=event->pos().y();
-
+void PaintWidget::mouseMoveEvent(QMouseEvent *event){
     if ( event->buttons() == Qt::LeftButton )
     {
-    if (isDrawing==true)
-    {
-        switch (ActiveTool)
-        {
-        case 101: case 102: case 201: case 103:
-        {
+        if (isDrawing==true && (ActiveTool==101 || ActiveTool==102 || ActiveTool==103))
             DrawFigure(event->pos(),event->pos());
-            break;
-        }
-        }
-    }
     }
     update();
     event->accept();
@@ -135,7 +164,6 @@ void PaintWidget::mouseMoveEvent(QMouseEvent *event)
 void PaintWidget::mouseReleaseEvent(QMouseEvent *event)
 {
     MP2=event->pos();
-    int i;
     if (event->button()==Qt::LeftButton)
     {
     if (isDrawing)
@@ -166,8 +194,12 @@ void PaintWidget::paintEvent(QPaintEvent *event)
 void PaintWidget::DrawFigure(QPoint a, QPoint b)
 {
     changed = true;
-    QPainter pnt(&image);
-    pnt.setPen(myPen);
+    QPainter pnt(&original_image);
+    QPen mod_pen = myPen;
+    a = QPoint(a.x()/zoom_k, a.y()/zoom_k);
+    b = QPoint(b.x()/zoom_k, b.y()/zoom_k);
+    mod_pen.setWidthF(myPen.width());
+    pnt.setPen(mod_pen);
     if (filling) pnt.setBrush(myBrush);
     switch (ActiveTool)
     {
@@ -204,6 +236,8 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
         break;
     case 6: // mars
     {
+        QBrush bb(Qt::NoBrush);
+        pnt.setBrush(bb);
         qreal x = abs(b.x() - a.x()), y = abs(b.y() - a.y()), r = sqrt(x*x + y*y);
         pnt.drawEllipse(QPointF(a), r, r);
         QLineF main, left, right;
@@ -254,13 +288,14 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
 
     case 101:
     {
-        QPen whitePen(Qt::white);
+        pnt.setCompositionMode(QPainter::CompositionMode_Clear);
+        QPen whitePen;
         whitePen.setWidth(myPen.widthF());
         pnt.setPen(whitePen);
         if(circle_style){
-            QBrush bb(Qt::white, Qt::SolidPattern);
+            QBrush bb(Qt::SolidPattern);
             pnt.setBrush(bb);
-            pnt.drawEllipse(b,(int)myPen.widthF()/4,(int)myPen.widthF()/4);
+            pnt.drawEllipse(b,(int)myPen.widthF(),(int)myPen.widthF());
         }
         else pnt.drawLine(a,b);
         break;
@@ -271,7 +306,7 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
         sprayPen.setColor(pnt.pen().color());
         sprayPen.setWidth(1);
         pnt.setPen(sprayPen);
-        for(int i=1; i<=BrushRadius;i++)
+        for(int i = 1; i<=BrushRadius*BrushRadius;i++)
         {
             int randomx, randomy;
             randomx=rand() % (BrushRadius) -  BrushRadius/2;
@@ -297,23 +332,25 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
             brcolor = myPen.color();
             QBrush bb(brcolor, Qt::SolidPattern);
             pnt.setBrush(bb);
-            pnt.drawEllipse(b,(int)myPen.widthF(),(int)myPen.widthF());
+            pnt.drawEllipse(b,(int)(myPen.widthF()),(int)(myPen.widthF()));
             break;
         }
         case 2:{
             QPen tpen(Qt::NoPen);
+            tpen.setWidth(mod_pen.widthF());
             pnt.setPen(tpen);
             pnt.setBrush(myBrush);
-            pnt.drawEllipse(b,(int)myPen.widthF(),(int)myPen.widthF());
+            pnt.drawEllipse(b,(int)(myPen.widthF()),(int)(myPen.widthF()));
             break;
         }
         case 3:{
             QColor brcolor(myPen.color().red(), myPen.color().green(), myPen.color().blue(), 15);
             QBrush bb(brcolor, Qt::SolidPattern);
             QPen tpen(Qt::NoPen);
+            tpen.setWidth(mod_pen.widthF());
             pnt.setPen(tpen);
             pnt.setBrush(bb);
-            pnt.drawEllipse(b,(int)myPen.widthF(),(int)myPen.widthF());
+            pnt.drawEllipse(b,(int)(myPen.widthF()),(int)(myPen.widthF()));
             break;
         }
         }
@@ -325,6 +362,7 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
     }
 
     int rad = (20 / 2) + 2;
+    performZoom(1);
     update(QRect(a, b).normalized().adjusted(-rad, -rad, +rad, +rad));
 }
 
@@ -370,7 +408,7 @@ void PaintWidget::Fill2(QRgb oldColor, QRgb newColor, int x, int y)
             int y1;
             bool spanLeft, spanRight;
 
-            stk.push(QPoint(x, y));
+            stk.push(QPoint(x/zoom_k, y/zoom_k));
 
             while (!stk.empty()) {
                 pt = stk.pop();
@@ -378,26 +416,27 @@ void PaintWidget::Fill2(QRgb oldColor, QRgb newColor, int x, int y)
                 y = pt.y();
 
                 y1 = y;
-                while (y1 >= 0 && image.pixel(x, y1) == oldColor) y1--;
+                while (y1 >= 0 && original_image.pixel(x, y1) == oldColor) y1--;
                 y1++;
 
                 spanLeft = spanRight = false;
-                while (y1 < image.height() && image.pixel(x, y1) == oldColor) {
-                    image.setPixel(x, y1, newColor);
-                    if (!spanLeft && x > 0 && image.pixel(x-1, y1) == oldColor) {
+                while (y1 < original_image.height() && original_image.pixel(x, y1) == oldColor) {
+                    original_image.setPixel(x, y1, newColor);
+                    if (!spanLeft && x > 0 && original_image.pixel(x-1, y1) == oldColor) {
                         stk.push(QPoint(x-1, y1));
                         spanLeft = true;
-                    } else if(spanLeft && x > 0 && image.pixel(x-1, y1) != oldColor) {
+                    } else if(spanLeft && x > 0 && original_image.pixel(x-1, y1) != oldColor) {
                         spanLeft = false;
                     }
-                    if (!spanRight && x < (image.width() - 1) && image.pixel(x+1, y1) == oldColor) {
+                    if (!spanRight && x < (original_image.width() - 1) && original_image.pixel(x+1, y1) == oldColor) {
                         stk.push(QPoint(x+1, y1));
                         spanRight = true;
-                    } else if(spanRight && (x < image.width() - 1) && image.pixel(x+1, y1) != oldColor) {
+                    } else if(spanRight && (x < original_image.width() - 1) && original_image.pixel(x+1, y1) != oldColor) {
                         spanRight = false;
                     }
                     y1++;
                 }
             }
+            image = original_image.scaled(original_size*zoom_k);
 }
 

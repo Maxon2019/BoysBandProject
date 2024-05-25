@@ -35,6 +35,9 @@ public slots:
     void setColor(QColor color);
     void setPenStyle(Qt::PenStyle style);
     void setBrushStyle(Qt::BrushStyle style);
+    void rotate(int angle);
+    void mirror(bool horizontal);
+    void reset();
 
 
 protected:
@@ -42,6 +45,8 @@ protected:
     void mousePressEvent  (QMouseEvent *event);
     void mouseMoveEvent   (QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
+    void wheelEvent(QWheelEvent *event);
+    void performZoom(qreal k);
     void DrawFigure(QPoint a, QPoint b);
     void Fill(QColor oldClr, QColor newClr, QPoint p);
     void Fill2(QRgb oldColor, QRgb newColor, int x, int y);
@@ -56,6 +61,9 @@ private:
   QBrush myBrush;
 
   int BrushRadius;
+  qreal zoom_k;
+  QSize original_size;
+  QImage original_image;
 
 };
 

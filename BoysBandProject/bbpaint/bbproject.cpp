@@ -9,8 +9,9 @@ QColor darkGray{50, 50, 50};
 QPalette light_palette(lightGray, lightGray);
 QPalette dark_palette(darkGray, darkGray);
 QSize image_default_size{1200, 675};
-const int default_brush_thickness = 7;
-const int default_eraser_size = 7;
+const int default_brush_thickness = 6;
+const int default_eraser_size = 8;
+const int default_shape_thisckness = 4;
 const char * supported_formats{"Images (*.png *.xpm *.jpg *.bmp *.jpeg)"};
 
 BBproject::BBproject(QWidget *parent)
@@ -23,11 +24,13 @@ BBproject::BBproject(QWidget *parent)
     ui->setupUi(this);
     er_size = default_eraser_size;
     br_thickness = default_brush_thickness;
+    sh_thickness = default_shape_thisckness;
     fill_shape = false;
-    paintwid = new PaintWidget;
+    paintwid = new PaintWidget(parent);
     ui->verticalLayout_2->addWidget(paintwid);
     ui->eraser_size->setText(QString::number(er_size));
     ui->brush_thickness->setText(QString::number(br_thickness));
+    ui->shape_thickness->setText(QString::number(sh_thickness));
     connect_all();
     path = new QString;
     connect_colors();
@@ -68,6 +71,7 @@ void BBproject::connect_all(){
     connect(ui->shape_fill, SIGNAL(stateChanged(int)), SLOT(fill_switched()));
     connect(ui->eraser_size, SIGNAL(editingFinished()), SLOT(eraser_edited()));
     connect(ui->brush_thickness, SIGNAL(editingFinished()), SLOT(brush_edited()));
+    connect(ui->shape_thickness, SIGNAL(editingFinished()), SLOT(shape_edited()));
     connect_buttons(ui->buttons, SLOT(clicked_tool()));
     connect_buttons(ui->eraser_modes, SLOT(clicked_eraser_mode()));
     connect_buttons(ui->shape_modes, SLOT(clicked_shape_mode()));
@@ -197,7 +201,7 @@ void BBproject::clicked_tool(){
         case 2:
             std::cout<<"switching to shapes tool\n";
             set_color(ui->eraser_page->findChild<color_widgets::ColorWheel*>()->color(), 0);
-            paintwid->setPenWidth(3);
+            paintwid->setPenWidth(sh_thickness);
             id = get_checked_button(ui->shape_modes);
             switch (id) {
             case 0:
@@ -440,6 +444,16 @@ void BBproject::eraser_edited(){
     paintwid->setPenWidth(er_size);
 }
 
+void BBproject::shape_edited(){
+    QLineEdit* line = qobject_cast<QLineEdit*>(sender());
+    bool ok;
+    int res = line->text().toInt(&ok);
+    if(ok) sh_thickness = res;
+    else line->setText(QString::number(sh_thickness));
+    std::cout<<"new shape thickness is "<<sh_thickness<<"\n";
+    paintwid->setPenWidth(sh_thickness);
+}
+
 void BBproject::brush_edited(){
     QLineEdit* line = qobject_cast<QLineEdit*>(sender());
     bool ok;
@@ -526,19 +540,19 @@ void BBproject::on_close_triggered()
 }
 
 void BBproject::rotate_clockwise_clicked(){
-
+    paintwid->rotate(90);
 }
 
 void BBproject::rotate_counter_clockwise_clicked(){
-
+    paintwid->rotate(-90);
 }
 
 void BBproject::mirror_hor_clicked(){
-
+    paintwid->mirror(false);
 }
 
 void BBproject::mirror_ver_clicked(){
-
+    paintwid->mirror(true);
 }
 
 void BBproject::on_light_triggered()
