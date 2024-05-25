@@ -297,7 +297,7 @@
            <bool>true</bool>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="mouse_page">
            <widget class="QWidget" name="verticalLayoutWidget_2">

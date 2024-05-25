@@ -3,14 +3,12 @@
         <file>mars-double.png</file>
         <file>icons.qrc</file>
         <file>triangle.png</file>
-        <file>square.png</file>
         <file>rotate-right.png</file>
         <file>rotate-left.png</file>
         <file>reflect-vertical.png</file>
         <file>reflect_horizontal.png</file>
         <file>rectangle.png</file>
         <file>brush.png</file>
-        <file>text.png</file>
         <file>eraser.png</file>
         <file>fill.png</file>
         <file>circle.png</file>
@@ -18,8 +16,6 @@
         <file>cursor.png</file>
         <file>cursor-white.png</file>
         <file>triangle-white.png</file>
-        <file>text-white.png</file>
-        <file>square-white.png</file>
         <file>rotate-right-white.png</file>
         <file>rotate-left-white.png</file>
         <file>reflect-vertical-white.png</file>
@@ -44,8 +40,6 @@
         <file>highlighter.png</file>
         <file>chalk-white.png</file>
         <file>chalk.png</file>
-        <file>brush-2-white.png</file>
-        <file>brush-2.png</file>
         <file>brush-1-white.png</file>
         <file>brush-1.png</file>
         <file>mars-white.png</file>

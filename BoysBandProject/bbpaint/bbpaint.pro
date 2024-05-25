@@ -43,9 +43,6 @@ DISTFILES += \
     img/fill.svg \
     img/fill.svg \
     img/fill_icon.svg \
-    img/mars-double.png \
-    img/mars-double.png \
-    img/mars-double.png \
     img/message-text.svg \
     img/message-text.svg \
     img/message-text.svg \
