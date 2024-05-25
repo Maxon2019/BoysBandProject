@@ -2,6 +2,8 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QPaintEngine>
+#include <math.h>
+#include <iostream>
 
 PaintWidget::PaintWidget(QWidget *parent) : QWidget(parent)
 {
@@ -140,7 +142,7 @@ void PaintWidget::mouseReleaseEvent(QMouseEvent *event)
     {
         switch (ActiveTool)
         {
-        case 1: case 2: case 3: case 4: case 5: case 7: case 8: case 9:
+        case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
         {
             DrawFigure(MP1,MP2);
             break;
@@ -169,30 +171,57 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
     if (filling) pnt.setBrush(myBrush);
     switch (ActiveTool)
     {
-    case 1:
+    case 1: // line
     {
         pnt.drawLine(a,b);
         break;
     }
-    case 2:
+    case 2: // rect
     {
         pnt.drawRect(QRect(a, b));
         break;
     }
-    case 3:
+    case 3: // arrow
     {
-        pnt.drawLine(a,b);
+        QLineF main{b, a}, left{b, a}, right{b, a};
+        qreal angle = main.angle();
+        left.setAngle(angle+30);
+        left.setLength(10);
+        right.setAngle(angle-30);
+        right.setLength(10);
+        pnt.drawLine(main);
+        pnt.drawLine(left);
+        pnt.drawLine(right);
         break;
     }
-    case 4:
+    case 4: // ellipse
     {
         pnt.drawEllipse(QRect(a, b));
         break;
     }
-    case 5:
+    case 5: // round rect
         pnt.drawRoundedRect(QRect(a, b), 20, 20);
         break;
-    case 7:
+    case 6: // mars
+    {
+        qreal x = abs(b.x() - a.x()), y = abs(b.y() - a.y()), r = sqrt(x*x + y*y);
+        pnt.drawEllipse(QPointF(a), r, r);
+        QLineF main, left, right;
+        left.setP1(QPointF(a.x() + r, a.y() - r));
+        left.setAngle(180);
+        left.setLength(r / 4);
+        right.setP1(QPointF(a.x() + r, a.y() - r));
+        right.setAngle(-90);
+        right.setLength(r / 4);
+        main.setP1(QPointF(a.x() + r, a.y() - r));
+        main.setAngle(-135);
+        main.setLength(r*sqrt(2) - r);
+        pnt.drawLine(left);
+        pnt.drawLine(right);
+        pnt.drawLine(main);
+        break;
+    }
+    case 7: // triangle
     {
         QPoint A{a.x(), b.y()}, B{(a.x()+b.x())/2, a.y()}, C{b};
         QPolygon polygon;
@@ -200,7 +229,7 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
         pnt.drawPolygon(polygon);
         break;
     }
-    case 8:
+    case 8: // star
     {
         QPoint A{(a.x()+b.x())/2, a.y()}, B{a.x()-24*(a.x()-b.x())/25, a.y()-7*(a.y()-b.y())/20}, C{a.x()-4*(a.x()-b.x())/5, a.y()-9*(a.y()-b.y())/10},
             D{a.x()-(a.x()-b.x())/5, a.y()-9*(a.y()-b.y())/10}, E{a.x()-(a.x()-b.x())/25, a.y()-7*(a.y()-b.y())/20},
@@ -211,7 +240,7 @@ void PaintWidget::DrawFigure(QPoint a, QPoint b)
         pnt.drawPolygon(polygon);
         break;
     }
-    case 9:
+    case 9: // david star
     {
         QPoint A{(a.x()+b.x())/2, a.y()}, B{a.x()-19*(a.x()-b.x())/20, a.y()-3*(a.y()-b.y())/4}, C{a.x()-(a.x()-b.x())/20, a.y()-3*(a.y()-b.y())/4},
             D{(a.x()+b.x())/2, b.y()}, E{b.x()+19*(a.x()-b.x())/20, b.y()+3*(a.y()-b.y())/4}, F{b.x()+(a.x()-b.x())/20, b.y()+3*(a.y()-b.y())/4};

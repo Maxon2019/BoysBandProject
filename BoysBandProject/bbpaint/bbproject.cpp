@@ -215,6 +215,9 @@ void BBproject::clicked_tool(){
             case 8:
                 paintwid->setActiveTool(5);
                 break;
+            case 4:
+                paintwid->setActiveTool(6);
+                break;
             case 2:
                 paintwid->setActiveTool(7);
                 break;
@@ -311,6 +314,9 @@ void BBproject::clicked_shape_mode(){
             break;
         case 5:
             paintwid->setActiveTool(4);
+            break;
+        case 4:
+            paintwid->setActiveTool(6);
             break;
         case 8:
             paintwid->setActiveTool(5);
@@ -562,7 +568,7 @@ void BBproject::on_light_triggered()
     ui->highlighter->setIcon(QIcon(":/icons/highlighter.png"));
     ui->chalk->setIcon(QIcon(":/icons/chalk.png"));
     ui->brush_1->setIcon(QIcon(":/icons/brush-1.png"));
-    ui->brush_2->setIcon(QIcon(":/icons/brush-2.png"));
+    ui->spray->setIcon(QIcon(":/icons/spray.png"));
     ui->shape_mars->setIcon(QIcon(":/icons/mars-white.png"));
 }
 
@@ -594,7 +600,7 @@ void BBproject::on_dark_triggered()
     ui->highlighter->setIcon(QIcon(":/icons/highlighter-white.png"));
     ui->chalk->setIcon(QIcon(":/icons/chalk-white.png"));
     ui->brush_1->setIcon(QIcon(":/icons/brush-1-white.png"));
-    ui->brush_2->setIcon(QIcon(":/icons/brush-2-white.png"));
+    ui->spray->setIcon(QIcon(":/icons/spray-white.png"));
     ui->shape_mars->setIcon(QIcon(":/icons/mars.png"));
 }
 

@@ -297,7 +297,7 @@
            <bool>true</bool>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="mouse_page">
            <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -929,13 +929,13 @@
                 </widget>
                </item>
                <item row="0" column="5">
-                <widget class="QToolButton" name="brush_2">
+                <widget class="QToolButton" name="spray">
                  <property name="text">
                   <string>...</string>
                  </property>
                  <property name="icon">
                   <iconset>
-                   <normalon>:/icons/brush-2.png</normalon>
+                   <normalon>:/icons/spray.png</normalon>
                   </iconset>
                  </property>
                 </widget>
@@ -1292,7 +1292,7 @@
              <item>
               <layout class="QVBoxLayout" name="fill_effects">
                <property name="spacing">
-                <number>-1</number>
+                <number>6</number>
                </property>
                <item>
                 <widget class="QToolButton" name="f_e_1">
@@ -1490,8 +1490,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>924</width>
-             <height>598</height>
+             <width>930</width>
+             <height>615</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -1518,7 +1518,7 @@
      <x>0</x>
      <y>0</y>
      <width>1254</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="view">
