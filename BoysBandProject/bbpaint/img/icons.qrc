@@ -50,5 +50,7 @@
         <file>6star.png</file>
         <file>star-white.png</file>
         <file>star.png</file>
+        <file>square.png</file>
+        <file>square-white.png</file>
     </qresource>
 </RCC>

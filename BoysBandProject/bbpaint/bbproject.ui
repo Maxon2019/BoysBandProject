@@ -1291,8 +1291,8 @@
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>270</width>
-              <height>480</height>
+              <width>280</width>
+              <height>500</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="effects_layout" stretch="1,0,2,1,0,2">
@@ -1517,8 +1517,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>930</width>
-             <height>615</height>
+             <width>924</width>
+             <height>598</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -1545,7 +1545,7 @@
      <x>0</x>
      <y>0</y>
      <width>1254</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="view">

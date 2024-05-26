@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QAbstractButton>
 #include <QMessageBox>
+#include <QStyleFactory>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -31,9 +32,9 @@ public:
     void addListItem(QHBoxLayout** list, int &count);
     void connect_colors();
     void set_color(QColor color, int index);
-    void drawBtnIcons();
-    QPixmap pixForBrush(QBrush brush);
-    QPixmap pixForPen(QPen pen);
+    void drawBtnIcons(QColor color = Qt::black);
+    QPixmap pixForBrush(QColor color, QBrush brush);
+    QPixmap pixForPen(QColor color, QPen pen);
     void uncheck_buttons_l(QLayout *container);
     void connect_buttons_l(QLayout *container, const char* slot);
     int get_checked_button_l(QLayout *container);

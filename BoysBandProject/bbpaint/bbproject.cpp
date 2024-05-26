@@ -20,7 +20,6 @@ BBproject::BBproject(QWidget *parent)
 {
     this->setWindowTitle("Blue Lines - Безымянный");
     this->setWindowIcon(QIcon(":/icons/mars-double.png"));
-    this->setPalette(light_palette);
     ui->setupUi(this);
     er_size = default_eraser_size;
     br_thickness = default_brush_thickness;
@@ -566,8 +565,8 @@ void BBproject::on_light_triggered()
     ui->effects->setIcon(QIcon(":/icons/effects.png"));
     ui->rotate_clockwise->setIcon(QIcon(":/icons/rotate-right.png"));
     ui->rotate_counterclockwise->setIcon(QIcon(":/icons/rotate-left.png"));
-    ui->horizontal_mirror->setIcon(QIcon(":/icons/reflect-horizontal.png"));
-    ui->vertical_mirror->setIcon(QIcon(":/icons/reflect-vertical.png"));
+    ui->horizontal_mirror->setIcon(QIcon(":/icons/reflect-vertical.png"));
+    ui->vertical_mirror->setIcon(QIcon(":/icons/reflect_horizontal.png"));
     ui->eraser_circle->setIcon(QIcon(":/icons/circle.png"));
     ui->eraser_square->setIcon(QIcon(":/icons/square.png"));
     ui->shape_line->setIcon(QIcon(":/icons/line.png"));
@@ -584,6 +583,7 @@ void BBproject::on_light_triggered()
     ui->brush_1->setIcon(QIcon(":/icons/brush-1.png"));
     ui->spray->setIcon(QIcon(":/icons/spray.png"));
     ui->shape_mars->setIcon(QIcon(":/icons/mars-white.png"));
+    drawBtnIcons();
 }
 
 
@@ -598,8 +598,8 @@ void BBproject::on_dark_triggered()
     ui->effects->setIcon(QIcon(":/icons/effects-white.png"));
     ui->rotate_clockwise->setIcon(QIcon(":/icons/rotate-right-white.png"));
     ui->rotate_counterclockwise->setIcon(QIcon(":/icons/rotate-left-white.png"));
-    ui->horizontal_mirror->setIcon(QIcon(":/icons/reflect-horizontal-white.png"));
-    ui->vertical_mirror->setIcon(QIcon(":/icons/reflect-vertical-white.png"));
+    ui->horizontal_mirror->setIcon(QIcon(":/icons/reflect-vertical-white.png"));
+    ui->vertical_mirror->setIcon(QIcon(":/icons/reflect-horizontal-white.png"));
     ui->eraser_circle->setIcon(QIcon(":/icons/circle-white.png"));
     ui->eraser_square->setIcon(QIcon(":/icons/square-white.png"));
     ui->shape_line->setIcon(QIcon(":/icons/line-white.png"));
@@ -616,6 +616,7 @@ void BBproject::on_dark_triggered()
     ui->brush_1->setIcon(QIcon(":/icons/brush-1-white.png"));
     ui->spray->setIcon(QIcon(":/icons/spray-white.png"));
     ui->shape_mars->setIcon(QIcon(":/icons/mars.png"));
+    drawBtnIcons(Qt::white);
 }
 
 void BBproject::closeEvent(QCloseEvent *event)
@@ -638,14 +639,8 @@ void BBproject::closeEvent(QCloseEvent *event)
     }
 }
 
-void BBproject::drawBtnIcons()
+void BBproject::drawBtnIcons(QColor color)
 {
-    ui->f_e_1->setIcon(pixForBrush(QBrush(Qt::SolidPattern)));
-    ui->f_e_3->setIcon(pixForBrush(QBrush(Qt::Dense5Pattern)));
-    ui->f_e_4->setIcon(pixForBrush(QBrush(Qt::HorPattern)));
-    ui->f_e_5->setIcon(pixForBrush(QBrush(Qt::VerPattern)));
-    ui->f_e_6->setIcon(pixForBrush(QBrush(Qt::CrossPattern)));
-    ui->f_e_7->setIcon(pixForBrush(QBrush(Qt::DiagCrossPattern)));
     QSize e_but_size = ui->f_e_1->geometry().size();
     ui->f_e_1->setIconSize(e_but_size);
     ui->f_e_3->setIconSize(e_but_size);
@@ -653,31 +648,38 @@ void BBproject::drawBtnIcons()
     ui->f_e_5->setIconSize(e_but_size);
     ui->f_e_6->setIconSize(e_but_size);
     ui->f_e_7->setIconSize(e_but_size);
+    ui->f_e_1->setIcon(pixForBrush(color, QBrush(Qt::SolidPattern)));
+    ui->f_e_3->setIcon(pixForBrush(color, QBrush(Qt::Dense5Pattern)));
+    ui->f_e_4->setIcon(pixForBrush(color, QBrush(Qt::HorPattern)));
+    ui->f_e_5->setIcon(pixForBrush(color, QBrush(Qt::VerPattern)));
+    ui->f_e_6->setIcon(pixForBrush(color, QBrush(Qt::CrossPattern)));
+    ui->f_e_7->setIcon(pixForBrush(color, QBrush(Qt::DiagCrossPattern)));
 
-    ui->o_e_1->setIcon(pixForPen(QPen(Qt::SolidLine)));
-    ui->o_e_2->setIcon(pixForPen(QPen(Qt::DashLine)));
-    ui->o_e_3->setIcon(pixForPen(QPen(Qt::DashDotLine)));
-    ui->o_e_4->setIcon(pixForPen(QPen(Qt::DashDotDotLine)));
-    ui->o_e_5->setIcon(pixForPen(QPen(Qt::DotLine)));
     QSize o_but_size = ui->o_e_1->geometry().size();
     ui->o_e_1->setIconSize(o_but_size);
     ui->o_e_2->setIconSize(o_but_size);
     ui->o_e_3->setIconSize(o_but_size);
     ui->o_e_4->setIconSize(o_but_size);
     ui->o_e_5->setIconSize(o_but_size);
+    ui->o_e_1->setIcon(pixForPen(color, QPen(Qt::SolidLine)));
+    ui->o_e_2->setIcon(pixForPen(color, QPen(Qt::DashLine)));
+    ui->o_e_3->setIcon(pixForPen(color, QPen(Qt::DashDotLine)));
+    ui->o_e_4->setIcon(pixForPen(color, QPen(Qt::DashDotDotLine)));
+    ui->o_e_5->setIcon(pixForPen(color, QPen(Qt::DotLine)));
 }
 
-QPixmap BBproject::pixForBrush(QBrush brush)
+QPixmap BBproject::pixForBrush(QColor color, QBrush brush)
 {
     int x,y;
-    x = ui->f_e_1->geometry().width();
-    y=ui->f_e_1->geometry().height();
+    x=185;
+    y=40;
     QPixmap pixmap(x,y);
     pixmap.fill(Qt::transparent);
     QPainter painter(&pixmap);
     QPixmap image;
     QRect target(0, 0, x, y);
     QRect source(0, 0, x, y);
+    brush.setColor(color);
     painter.setBrush(brush);
     painter.fillRect(QRect(5, 2, x-10, y-5), brush);
     painter.drawPixmap(target, image, source);
@@ -685,7 +687,7 @@ QPixmap BBproject::pixForBrush(QBrush brush)
     return pixmap;
 }
 
-QPixmap BBproject::pixForPen(QPen pen)
+QPixmap BBproject::pixForPen(QColor color, QPen pen)
 {
     int x,y;
     x=185;
@@ -696,7 +698,7 @@ QPixmap BBproject::pixForPen(QPen pen)
     QPixmap image;
     QRect target(0, 0, x, y);
     QRect source(0, 0, x, y);
-    pen.setColor(Qt::black);
+    pen.setColor(color);
     pen.setWidth(3);
     painter.setPen(pen);
     painter.drawLine(QPointF(5,y/2),QPointF(x-5,y/2));
